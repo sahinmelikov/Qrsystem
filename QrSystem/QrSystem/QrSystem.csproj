@@ -1,0 +1,49 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\mado\hts-cache\ref\" />
+    <Folder Include="wwwroot\mado\mado.az\menu\bakery\" />
+    <Folder Include="wwwroot\mado\mado.az\menu\biznes-lanch\" />
+    <Folder Include="wwwroot\mado\mado.az\menu\drinks\" />
+    <Folder Include="wwwroot\mado\mado.az\menu\ice-cream\" />
+    <Folder Include="wwwroot\mado\mado.az\menu\meals\breakfast\" />
+    <Folder Include="wwwroot\mado\mado.az\menu\meals\burgers-sandwiches\" />
+    <Folder Include="wwwroot\mado\mado.az\menu\meals\diyetik\" />
+    <Folder Include="wwwroot\mado\mado.az\menu\meals\hot-dishes\" />
+    <Folder Include="wwwroot\mado\mado.az\menu\meals\kabab\" />
+    <Folder Include="wwwroot\mado\mado.az\menu\meals\pasta\" />
+    <Folder Include="wwwroot\mado\mado.az\menu\meals\pizza\" />
+    <Folder Include="wwwroot\mado\mado.az\menu\meals\salads\" />
+    <Folder Include="wwwroot\mado\mado.az\menu\meals\sancks\" />
+    <Folder Include="wwwroot\mado\mado.az\menu\meals\soups\" />
+    <Folder Include="wwwroot\mado\mado.az\menu\special-menu\" />
+    <Folder Include="wwwroot\mado\mado.az\menu\yeni\" />
+    <Folder Include="wwwroot\mado\mado.az\pics\259\259\product\111\" />
+    <Folder Include="wwwroot\mado\mado.az\pics\259\259\product\113\" />
+    <Folder Include="wwwroot\mado\mado.az\pics\259\259\product\115\" />
+    <Folder Include="wwwroot\mado\mado.az\pics\259\259\product\117\" />
+    <Folder Include="wwwroot\mado\mado.az\pics\259\259\product\408\" />
+    <Folder Include="wwwroot\mado\mado.az\pics\259\259\product\535\" />
+    <Folder Include="wwwroot\mado\mado.az\pics\259\259\product\537\" />
+    <Folder Include="wwwroot\mado\mado.az\pics\259\259\product\538\" />
+    <Folder Include="wwwroot\mado\mado.az\pics\259\259\product\539\" />
+    <Folder Include="wwwroot\mado\mado.az\pics\259\259\product\619\" />
+    <Folder Include="wwwroot\mado\mado.az\pics\259\259\product\646\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.16" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.16" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.16">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+</Project>
