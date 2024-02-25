@@ -1,0 +1,38 @@
+﻿@using QrSystem.ViewModel
+@model HomeVM
+
+<h2>Sepet</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Ürün Adı</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Product)
+        {
+            <tr>
+                <td>@item.Name</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var addToCartButtons = document.querySelectorAll('.sebet');
+
+        addToCartButtons.forEach(function (button) {
+            button.addEventListener('click', function () {
+                var productName = this.parentElement.querySelector('h3 a').innerText;
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', '/Cart/AddToCart', true);
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+                xhr.send('productName=' + encodeURIComponent(productName));
+                console.log("Ürün sepete eklendi:", productName);
+                console.log("ok"); // Konsola "ok" yazdır
+            });
+        });
+    });
+</script>

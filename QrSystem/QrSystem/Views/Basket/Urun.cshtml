@@ -1,0 +1,35 @@
+﻿@using QrSystem.ViewModel
+@model CheckoutViewModel
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sepet</title>
+    <a href="c:\users\sahin\desktop\qrsystem\qrsystem\qrsystem\views\basket\urun.cshtml">c:\users\sahin\desktop\qrsystem\qrsystem\qrsystem\views\basket\urun.cshtml</a>
+</head>
+<body>
+    <h2>Sepetinizdeki Ürünler</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Ürün Adı</th>
+                <th>Miktar</th>
+                <th>Fiyat</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model.ProductsInCart)
+            {
+                <tr>
+                    <td>@product.Name</td>
+                    <td>@product.ProductCount</td>
+                    <td>@product.Price.ToString("C2")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <p>Toplam Tutar: @Model.TotalAmount.ToString("C2")</p>
+</body>
+</html>

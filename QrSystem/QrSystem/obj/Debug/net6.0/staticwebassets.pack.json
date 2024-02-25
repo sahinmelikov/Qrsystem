@@ -245,6 +245,10 @@
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
     },
     {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\mado\\Ekran şəkli 2024-02-24 213623.png",
+      "PackagePath": "staticwebassets\\mado\\Ekran şəkli 2024-02-24 213623.png"
+    },
+    {
       "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\mado\\ajax.googleapis.com\\ajax\\libs\\jquery\\3.3.1\\jquery.min.js",
       "PackagePath": "staticwebassets\\mado\\ajax.googleapis.com\\ajax\\libs\\jquery\\3.3.1\\jquery.min.js"
     },
@@ -1995,6 +1999,10 @@
     {
       "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\mado\\mado.az\\uploads\\product\\9\\srtli_shr_yemyi_1663140482.jpg",
       "PackagePath": "staticwebassets\\mado\\mado.az\\uploads\\product\\9\\srtli_shr_yemyi_1663140482.jpg"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\mado\\sebet.png",
+      "PackagePath": "staticwebassets\\mado\\sebet.png"
     },
     {
       "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.QrSystem.Microsoft.AspNetCore.StaticWebAssets.props",

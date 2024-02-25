@@ -6,13 +6,13 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-var app = builder.Build();
+
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
-    options.UseSqlServer("Server=.;Database=Qr;Trusted_Connection=True;");
+    options.UseSqlServer("Server=DESKTOP-JOV1OEK;Database=Qr;Trusted_Connection=True;");
 
 });
-
+var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {

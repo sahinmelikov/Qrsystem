@@ -1,0 +1,213 @@
+﻿@using QrSystem.ViewModel
+
+@model List<BasketİtemVM>
+@{
+    ViewData["Title"] = "Index";
+    int count = 1;
+}
+
+@{
+    ViewBag.Title = "Ürünler";
+}
+@{
+    double Allprice = 0;
+    double Count = 0;
+}
+
+
+
+
+<!DOCTYPE html>
+<html lang="az">
+
+<!-- Mirrored from www.arizon.az/az/cart/get-list by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 09 Jun 2023 16:30:11 GMT -->
+<!-- Added by HTTrack -->
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Səbətdəki məhsullar  | Azərbaycanın Online Alışveriş Saytı Arizon.az</title>
+    <meta http-equiv="content-language" content="az">
+    <meta name="csrf-token" content="M85N5au8EFw5fIHoVDq1Xt78R8PfgeUVuUse8pdt" />
+    <script src="../../cdn-cgi/apps/head/Gd6MZLBdeI8JqGMYwGDOkaXYMCo.js"></script>
+    <link rel="icon" type="image/x-icon" href="../../favicon.ico">
+    <meta name="theme-color" content="#232f3e" />
+    <meta name="robots" content="noindex, nofollow" />
+    <link href="https://www.arizon.az/frontend/plugins/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="https://www.arizon.az/frontend/plugins/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" type="text/css">
+    <link href="https://www.arizon.az/frontend/plugins/toastr/toastr.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://www.arizon.az/frontend/css/main.css?v27" rel="stylesheet" type="text/css" />
+    <link href="https://www.arizon.az/frontend/css/reset.css" rel="stylesheet" type="text/css" />
+    <link href="https://www.arizon.az/frontend/css/style.css?v27" rel="stylesheet" type="text/css" />
+    <link href="https://www.arizon.az/frontend/css/mega-menu.css?v27" rel="stylesheet" type="text/css" />
+    <link href="https://www.arizon.az/frontend/css/responsive.css?v27" rel="stylesheet" type="text/css" />
+    <link href="https://www.arizon.az/frontend/plugins/slick/slick.css" rel="stylesheet" type="text/css">
+    <link href="https://www.arizon.az/frontend/plugins/slick/slick-theme.css" rel="stylesheet" type="text/css">
+    <link href="https://www.arizon.az/frontend/plugins/fontawesome/css/all.css" rel="stylesheet" type="text/css" />
+    <link href="https://www.arizon.az/frontend/css/mobile.css?v27" rel="stylesheet" type="text/css" />
+
+    <link href="https://www.arizon.az/frontend/wpchatplugin/wpchat.css" rel="stylesheet">
+    <link href="https://www.arizon.az/frontend/wpchatplugin/wpchatcustom.css" rel="stylesheet">
+
+    <script type="38ff3c42613e138c5e4aacc9-text/javascript">
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1069280496971507');
+        fbq('track', 'PageView');
+    </script>
+    <noscript>
+        <img height="1" width="1" style="display:none"
+             src="https://www.facebook.com/tr?id=1069280496971507&amp;ev=PageView&amp;noscript=1" />
+    </noscript>
+
+</head>
+<main>
+    <div class="basket-page">
+        <div class="container">
+            <div class="menu-link"><a>Ana səhifə / </a> <a class="fw-bold m-0">Səbətdəki məhsullar</a></div>
+            <div class="row">
+                <div class="col-lg-8 col-12">
+                    <div class="my-basket">
+                        <div class="all">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="select-all">
+                                <label class="form-check-label mt-1" for="select-all">
+                                    Hamısını seç
+                                    </labe>
+                            </div>
+                        </div>
+                        <div class="trash_">
+                            <div class="btn trash">
+                                <i class="fa-regular fa-trash-can" style="color: #ff4747"></i>
+                                Seçilənləri sil (<span class="selected-product-count">0</span>)
+                            </div>
+                            <form class="cart-selected-item-delete" action="@Url.Action("RemoveAllItemsFromBasket", "Basket")" method="post">
+                                <input type="hidden" name="_token" value="UVDsOAzAS7pK5VA0SyeTAexfoFziZCWSEiMvXcLP"> <input type="hidden" name="_method" value="DELETE"> <div class="trash-menu text-center" style="display: none;">
+                                    <p class="mb-3">Məhsulu səbətdən  sil></p>
+
+                                    <button type="submit" class="button-bg">Bəli</button>
+
+                                    <button type="reset" class="button-border">Xeyr</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="product-all">
+
+                        @foreach (var item in Model)
+                        {
+                            <div class="product d-flex py-2">
+                                <div class="product-detail d-flex  w-50">
+                                    <div class="form-check">
+                                        <input class="form-check-input item" type="checkbox" value="@item.Id" id="cart-product-@item.Id">
+                                    </div>
+                                    <div class="image">
+                                        <img src="~/RootAllPictures/img/@item.ImagePath">
+                                    </div>
+                                    <div class="detail ">
+                                        <label class="name" for="cart-product-@item.Id">@item.Name</label>
+                                        <div class="date">
+                                            <p class="py-2">Çatdırılma: 48 saat ərzində</p>
+                                            <div class="button input d-flex basket-count">
+                                                <form action="/Basket/UpdateBasketItem" method="post" class="cart-item-update">
+                                                    @Html.Hidden("productId", item.Id)
+                                                    <!-- Ürün miktarını güncelleme formu -->
+                                                    <button type="submit" class="dec" name="action" value="decrement">-</button>
+                                                    <input type="text" name="quantity" value="@item.ProductCount" id="miktar_@item.Id" readonly>
+                                                    <button type="submit" class="inc" name="action" value="increment">+</button>
+                                                </form>
+                                            </div>
+                                            <div class="trash_">
+                                                <div class="btn trash"><i class="fa-regular fa-trash-can" style="color: #ff4747"></i></div>
+                                                <form class="cart-item-delete">
+                                                    <input type="hidden" name="_token" value="UVDsOAzAS7pK5VA0SyeTAexfoFziZCWSEiMvXcLP">
+                                                    <input type="hidden" name="_method" value="DELETE">
+                                                    <input type="hidden" name="id" value="@item.Id">
+                                                    <div class="trash-menu text-center" style="display: none;">
+                                                        <p class="mb-3">Məhsulu səbətdən silmək istədiyinizə əminsiniz?</p>
+                                                        <p>@ViewBag.MyData</p>
+                                                        <a asp-route-id="@item.Id" asp-action="RemoveItemFromBasket" class="button-border" type="submit">Bəli</a>
+                                                        <button type="reset" class="button-border">Xeyr</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="status text-end">
+                                    <p class="old_price">@item.Price <i class="icon-azn">M</i></p>
+                                    <p id="fiyat_@item.Id" class="price">
+                                       
+                                        <i class="icon-azn">M</i>
+                                    </p>
+                                 
+                                </div>
+                            </div>
+                        }
+
+
+
+
+                    </div>
+                </div>
+                <div class="col-lg-4 col-12">
+                    <div class="total">
+                        <form action="https://www.arizon.az/cart-processes" method="post" class="cart-processes">
+                            <input type="hidden" name="_token" value="UVDsOAzAS7pK5VA0SyeTAexfoFziZCWSEiMvXcLP"> <h2 class="basket-page-title ">Səbətim</h2>
+                            <button type="button" class="cart-next-btn" onclick="window.location.href = '@Url.Action("Checkout", "Basket")'">Siparişinizi Onaylayın</button>
+
+
+                            @foreach (var item in Model)
+                            {
+
+                                Allprice = @item.Price* @item.ProductCount + @Allprice;
+
+
+                            }
+
+                            <div style="border: 1px solid #ccc; ">
+
+                                <h5>
+                                    Səbətdəki məhsullar <span>
+                                    </span>
+                                </h5>
+                                <div class="about">
+                                    <div class="price d-flex justify-content-end">
+                                        <p>Məhsullar</p>
+                                        <span class="pricespan">
+
+                                            @Allprice
+                                        </span><span> ‎₼</span>
+
+                                    </div>
+                                    <hr />
+
+                                </div>
+                                <div class="total d-flex justify-content-end">
+                                    <p>Yekun ödəniləcək məbləğ:</p>
+                                    <span class="pricetotal">
+                                        @Allprice
+                                    </span><span> ‎₼</span>
+
+                                </div>
+                            </div>
+
+
+                            <p class="condition">Davam etməklə mən <a href=":page1" target="_blank">İstifadə Şərtlərini</a> və <a href=":page2" target="_blank">Məxfilik Siyasətini </a> qəbul edirəm</p>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+</html>
+

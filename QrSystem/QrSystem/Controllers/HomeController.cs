@@ -1,32 +1,38 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using QrSystem.DAL;
 using QrSystem.Models;
+using QrSystem.ViewModel;
 using System.Diagnostics;
 
 namespace QrSystem.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly AppDbContext _appDbContext;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(AppDbContext appDbContext)
         {
-            _logger = logger;
+            _appDbContext = appDbContext;
         }
 
         public IActionResult Index()
         {
-            return View();
+            HomeVM homeVM = new HomeVM()
+            {
+                Product = _appDbContext.Products.ToList(),
+            };
+            return View(homeVM);
         }
-
-        public IActionResult Privacy()
+        public IActionResult Sebet()
         {
-            return View();
-        }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            HomeVM homeVM = new HomeVM()
+            {
+                Product = _appDbContext.Products.ToList(),
+            };
+            return View(homeVM);
         }
+     
+
     }
 }

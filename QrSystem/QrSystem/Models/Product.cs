@@ -6,8 +6,10 @@
         public string Name { get; set; }
         public string Description { get; set; }
         public double Price { get; set; }
-        public QrCode QrCode { get; set;}
-        public int QrCodeId { get; set; }
+        public int Quantity { get; set; }
+        public string ImagePath { get; set; }
+        public RestourantTables Tables { get; set;}
+        public int TablesId { get; set; }
 
     }
 }

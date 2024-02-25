@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "w3SnFEWfD30ot0rCm/XCWXHOKLxPlCX+CBElM4zPqZM=",
+  "Hash": "2zXJH4KR7Lxc4umsAkX//vDxhv0666C6JMRp5PnlFQM=",
   "Source": "QrSystem",
   "BasePath": "_content/QrSystem",
   "Mode": "Default",
@@ -1212,6 +1212,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\mado\\ajax.googleapis.com\\ajax\\libs\\jquery\\3.3.1\\jquery.min.js"
+    },
+    {
+      "Identity": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\mado\\Ekran şəkli 2024-02-24 213623.png",
+      "SourceId": "QrSystem",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\",
+      "BasePath": "_content/QrSystem",
+      "RelativePath": "mado/Ekran şəkli 2024-02-24 213623.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\mado\\Ekran şəkli 2024-02-24 213623.png"
     },
     {
       "Identity": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\mado\\hts-cache\\doit.log",
@@ -9515,6 +9534,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\mado\\mado.az\\uploads\\product\\9\\srtli_shr_yemyi_1663140482.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\mado\\sebet.png",
+      "SourceId": "QrSystem",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\",
+      "BasePath": "_content/QrSystem",
+      "RelativePath": "mado/sebet.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\mado\\sebet.png"
     }
   ]
 }
