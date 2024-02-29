@@ -11,7 +11,9 @@ namespace QrSystem.ViewModel
         public string Description { get; set; }
         [Required]
         public double Price { get; set; }
-  
+        public string TableName { get; set; }
+        public int QrCodeId { get; set; }
+        public int ProductId { get; set; }
         [Required]
 
         public string ImagePath { get; set; }

@@ -1,5 +1,5 @@
 ﻿@using QrSystem.ViewModel
-@model CheckoutViewModel
+@model Dictionary<string, List<BasketİtemVM>>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -7,29 +7,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sepet</title>
-    <a href="c:\users\sahin\desktop\qrsystem\qrsystem\qrsystem\views\basket\urun.cshtml">c:\users\sahin\desktop\qrsystem\qrsystem\qrsystem\views\basket\urun.cshtml</a>
 </head>
 <body>
     <h2>Sepetinizdeki Ürünler</h2>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Ürün Adı</th>
-                <th>Miktar</th>
-                <th>Fiyat</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var product in Model.ProductsInCart)
-            {
+
+    @foreach (var table in Model)
+    {
+        <h3>Masa @table.Key</h3>
+        <table class="table">
+            <thead>
                 <tr>
-                    <td>@product.Name</td>
-                    <td>@product.ProductCount</td>
-                    <td>@product.Price.ToString("C2")</td>
+                    <th>Ürün Adı</th>
+                    <th>Açıklama</th>
+                    <th>Fiyat</th>
+                    <th>Miktar</th>
+                    <th>Görsel</th>
                 </tr>
-            }
-        </tbody>
-    </table>
-    <p>Toplam Tutar: @Model.TotalAmount.ToString("C2")</p>
+            </thead>
+            <tbody>
+                @foreach (var product in table.Value)
+                {
+                    <tr>
+                        <td>@product.Name</td>
+                        <td>@product.Description</td>
+                        <td>@product.Price.ToString("C2")</td>
+                        <td>@product.ProductCount</td>
+                        <td><img src="@product.ImagePath" alt="@product.Name" width="100" height="100" /></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+    <!-- Diğer içerikler -->
 </body>
 </html>

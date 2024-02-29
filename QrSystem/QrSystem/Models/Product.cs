@@ -8,8 +8,7 @@
         public double Price { get; set; }
         public int Quantity { get; set; }
         public string ImagePath { get; set; }
-        public RestourantTables Tables { get; set;}
-        public int TablesId { get; set; }
+        public List<RestourantTables> Tables { get; set; }
 
     }
 }

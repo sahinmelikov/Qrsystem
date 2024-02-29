@@ -80,8 +80,10 @@
                                                             <a href="https://mado.az/menu?hl=az" title="Menyu" class="on" itemprop="url">
                                                                 <span val="Menyu" itemprop="name">Menyu</span>
                                                             </a>
+
                                                             <a class="opener" href="#"></a>
                                                             <ul>
+                                                               
                                                                 <li class="" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
                                                                     <a href="special-menuce56.html?hl=az" title="Özəl təkliflər" class="" itemprop="url"><span val="Özəl təkliflər" itemprop="name">Özəl təkliflər</span></a>
                                                                 </li>
@@ -241,6 +243,24 @@
                                     Yeməklər
                                 </li>
                             </ul>
+
+
+
+                            <form method="post" asp-action="Index" asp-route-qrCodeId="@ViewBag.QrCodeId">
+                                <div class="form-group">
+                                    <label for="qrCodeId">Masa QR Kodu:</label>
+                                    <input type="text" id="qrCodeId" name="qrCodeId" class="form-control" />
+                                </div>
+                                <button type="submit" class="btn btn-primary">Gönder</button>
+                            </form>
+
+
+
+
+
+
+                           
+
                         </div>
                     </div>
                     <div class="row">
@@ -259,10 +279,15 @@
                                                 <div class="thumbnail-content">
                                                     <span class="price icon-manat">@item.Price</span>
                                                     <h3><a href="meals/Pomidor-xiyar-salati-54.html">@item.Name</a></h3>
-                                                    <form action="https://www.arizon.az/add-to-cart" method="post" class="col-5 p-0 add-to-cart d-flex justify-content-end">
-                                                        <input type="hidden" name="_token" value="M85N5au8EFw5fIHoVDq1Xt78R8PfgeUVuUse8pdt"> <input type="hidden" name="product_id" value="701">
-                                                        <button asp-controller="Basket" asp-action="AddBasket" asp-route-id="@item.Id" type="submit" class="btn artir"><img src="~/mado/sebet.png" /></button>
+                                                    <form asp-controller="Basket" asp-action="AddBasket" method="post" class="col-5 p-0 add-to-cart d-flex justify-content-end">
+                                                        <input type="hidden" name="qrCodeId" value="@ViewBag.QrCodeId" />
+                                                        <input type="hidden" name="_token" value="M85N5au8EFw5fIHoVDq1Xt78R8PfgeUVuUse8pdt">
+                                                        <input type="hidden" name="productId" value="10"> <!-- Değişiklik burada -->
+                                                        <button type="submit" class="btn artir"><img src="~/mado/sebet.png" /></button>
                                                     </form>
+
+
+                                                  
                                                     <p></p>
                                                 </div>
                                             </div>
