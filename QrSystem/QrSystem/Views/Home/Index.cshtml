@@ -1,5 +1,9 @@
 ﻿@using QrSystem.ViewModel
 @model HomeVM
+@using Microsoft.AspNetCore.Http 
+@{
+    var qrCodeIdValue = ViewBag.QrCodeId ?? "";
+}
 <!DOCTYPE html>
 <html lang="az">
 
@@ -246,10 +250,10 @@
 
 
 
-                            <form method="post" asp-action="Index" asp-route-qrCodeId="@ViewBag.QrCodeId">
+                            <form method="post" asp-action="Index">
                                 <div class="form-group">
                                     <label for="qrCodeId">Masa QR Kodu:</label>
-                                    <input type="text" id="qrCodeId" name="qrCodeId" class="form-control" />
+                                    <input type="text" id="qrCodeId" name="qrCodeId" value="@qrCodeIdValue" class="form-control" />
                                 </div>
                                 <button type="submit" class="btn btn-primary">Gönder</button>
                             </form>
@@ -279,10 +283,10 @@
                                                 <div class="thumbnail-content">
                                                     <span class="price icon-manat">@item.Price</span>
                                                     <h3><a href="meals/Pomidor-xiyar-salati-54.html">@item.Name</a></h3>
-                                                    <form asp-controller="Basket" asp-action="AddBasket" method="post" class="col-5 p-0 add-to-cart d-flex justify-content-end">
+                                                    <form asp-controller="Basket" asp-action="AddBasket"  method="post" class="col-5 p-0 add-to-cart d-flex justify-content-end">
                                                         <input type="hidden" name="qrCodeId" value="@ViewBag.QrCodeId" />
                                                         <input type="hidden" name="_token" value="M85N5au8EFw5fIHoVDq1Xt78R8PfgeUVuUse8pdt">
-                                                        <input type="hidden" name="productId" value="10"> <!-- Değişiklik burada -->
+                                                        <input type="hidden" name="productId" value="@item.Id"> <!-- Değişiklik burada -->
                                                         <button type="submit" class="btn artir"><img src="~/mado/sebet.png" /></button>
                                                     </form>
 

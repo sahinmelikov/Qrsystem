@@ -25,7 +25,7 @@ namespace QrSystem.Controllers
             ViewBag.BasketItemCount = itemCount;
         }
         [HttpGet]
-        public IActionResult Index(int? qrCodeId ,int productId)
+        public IActionResult Index(int? qrCodeId)
         {
             if (!qrCodeId.HasValue)
             {
@@ -33,106 +33,80 @@ namespace QrSystem.Controllers
                 return View(new List<BasketİtemVM>());
             }
 
-            // Masa nesnesini alırken, QR kodunu ve ürün ID'sini belirtin
-            var masa = _appDbContext.Tables.FirstOrDefault(m => m.QrCodeId == qrCodeId.Value && m.Products.Any(p => p.Id == productId));
-
+            var masa = _appDbContext.Tables
+                                     .Include(t => t.Products)
+                                     .FirstOrDefault(m => m.QrCodeId == qrCodeId);
             if (masa == null)
             {
                 ModelState.AddModelError(string.Empty, "Geçersiz QR kodu. Lütfen doğru bir QR kodu girin.");
                 return View(new List<BasketİtemVM>());
             }
+            ViewBag.QrCodeId = qrCodeId;
+            var basketCookieName = COOKIES_BASKET + "_" + qrCodeId;
+            List<BasketVM> basketVMList = JsonConvert.DeserializeObject<List<BasketVM>>(Request.Cookies[basketCookieName] ?? "[]");
 
-            if (masa.Products == null || !masa.Products.Any())
+            List<BasketİtemVM> basketItemVMs = new List<BasketİtemVM>();
+
+            foreach (var basketItem in basketVMList)
             {
-                ModelState.AddModelError(string.Empty, "Bu masaya henüz ürün eklenmemiş.");
-                return View(new List<BasketİtemVM>());
+                var product = _appDbContext.Products.FirstOrDefault(p => p.Id == basketItem.ProductId);
+                if (product != null)
+                {
+                    basketItemVMs.Add(new BasketİtemVM
+                    {
+                        Name = product.Name,
+                        Id = product.Id,
+                        Price=product.Price,
+                        ImagePath=product.ImagePath,
+                        
+                        QrCodeId = qrCodeId.Value,
+                        ProductId = basketItem.ProductId,
+                        ProductCount = basketItem.Count // Ürün sayısını burada ekleyin
+                    });
+                }
             }
-
-            List<BasketİtemVM> basketItemVMs = masa.Products.Select(product => new BasketİtemVM
-            {
-                Name = product.Name,
-                Id = product.Id,
-                Description = product.Description,
-                Price = product.Price,
-                ProductCount = 1, // Varsayılan olarak her üründen bir tane ekleyebilirsiniz.
-                ImagePath = product.ImagePath,
-                QrCodeId = qrCodeId.Value, // QR kodunu sakla
-                ProductId = product.Id // Ürün ID'sini sakla
-            }).ToList();
-
-            SetBasketItemCountInViewBag();
 
             return View(basketItemVMs);
         }
 
-
-
         [HttpPost]
         public IActionResult AddBasket(int qrCodeId, int productId)
         {
-            // QR kodunu kullanarak ilgili masayı bul
             var masa = _appDbContext.Tables.FirstOrDefault(m => m.QrCodeId == qrCodeId);
-            ViewBag.QrCodeId = qrCodeId;
-            ViewBag.ProductId = productId;
             if (masa == null)
             {
-                // Geçersiz QR kodu hatası ekle
                 ModelState.AddModelError(string.Empty, "Geçersiz QR kodu. Lütfen doğru bir QR kodu girin.");
                 return RedirectToAction("Index");
             }
 
-            // Masada belirtilen ürünü bul
             var product = _appDbContext.Products.FirstOrDefault(p => p.Id == productId);
-
             if (product == null)
             {
-                // Ürün bulunamadı hatası ekle
                 ModelState.AddModelError(string.Empty, "Ürün bulunamadı. Lütfen geçerli bir ürün seçin.");
                 return RedirectToAction("Index", new { qrCodeId });
             }
 
-            // Sepet bilgisini cookie'den al
-            List<BasketVM> basketVMList = JsonConvert.DeserializeObject<List<BasketVM>>(Request.Cookies[COOKIES_BASKET] ?? "[]");
+            var basketCookieName = COOKIES_BASKET + "_" + qrCodeId; // Her QR kodu için farklı bir cookie adı oluştur
+            List<BasketVM> basketVMList = JsonConvert.DeserializeObject<List<BasketVM>>(Request.Cookies[basketCookieName] ?? "[]");
 
-            // Masaya belirtilen ürünü ekle
-            BasketVM cookiesBasket = basketVMList.FirstOrDefault(s => s.ProductId == productId);
-            if (cookiesBasket != null)
+            var basketItem = basketVMList.FirstOrDefault(b => b.ProductId == productId);
+            if (basketItem != null)
             {
-                cookiesBasket.Count++;
+                basketItem.Count++;
             }
             else
             {
-                BasketVM basketVM = new BasketVM() { ProductId = productId, Count = 1 };
-                basketVMList.Add(basketVM);
+                basketVMList.Add(new BasketVM { ProductId = productId, Count = 1 });
             }
 
-            // Güncellenmiş sepet bilgisini cookie içerisine yaz
-            Response.Cookies.Append(COOKIES_BASKET, JsonConvert.SerializeObject(basketVMList.OrderBy(s => s.ProductId)));
+            var cookieOptions = new CookieOptions { Expires = DateTime.Now.AddDays(1) };
+            Response.Cookies.Append(basketCookieName, JsonConvert.SerializeObject(basketVMList), cookieOptions);
 
-            // Sepete ekledikten sonra, kullanıcıyı tekrar ilgili QR koduna sahip masa sayfasına yönlendir
             return RedirectToAction("Index", new { qrCodeId });
         }
 
-        // Sepete ürün eklemek için yardımcı bir metot
-        private void AddProductToBasket(int productId)
-        {
-            List<BasketVM> basketVMList = JsonConvert.DeserializeObject<List<BasketVM>>(Request.Cookies[COOKIES_BASKET] ?? "[]");
 
-            BasketVM cookiesBasket = basketVMList.FirstOrDefault(s => s.ProductId == productId);
-            if (cookiesBasket != null)
-            {
-                cookiesBasket.Count++;
-            }
-            else
-            {
-                BasketVM basketVM = new BasketVM() { ProductId = productId, Count = 1 };
-                basketVMList.Add(basketVM);
-            }
-
-            Response.Cookies.Append(COOKIES_BASKET, JsonConvert.SerializeObject(basketVMList.OrderBy(s => s.ProductId)));
-
-            SetBasketItemCountInViewBag();
-        }
+  
         public IActionResult RemoveFromBasket(int id)
         {
             List<BasketVM> basketVMList = JsonConvert.DeserializeObject<List<BasketVM>>(Request.Cookies[COOKIES_BASKET] ?? "[]");
@@ -157,27 +131,30 @@ namespace QrSystem.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public IActionResult RemoveItemFromBasket(int id)
+        public IActionResult RemoveItemFromBasket(int qrCodeId, int id)
         {
-            List<BasketVM> basketVMList = JsonConvert.DeserializeObject<List<BasketVM>>(Request.Cookies[COOKIES_BASKET] ?? "[]");
+            string basketCookieName = COOKIES_BASKET + "_" + qrCodeId;
+            List<BasketVM> basketVMList = JsonConvert.DeserializeObject<List<BasketVM>>(Request.Cookies[basketCookieName] ?? "[]");
 
             BasketVM productToRemove = basketVMList.FirstOrDefault(s => s.ProductId == id);
             if (productToRemove != null)
             {
                 basketVMList.Remove(productToRemove);
 
-                Response.Cookies.Append(COOKIES_BASKET, JsonConvert.SerializeObject(basketVMList.OrderBy(s => s.ProductId)));
+                Response.Cookies.Append(basketCookieName, JsonConvert.SerializeObject(basketVMList.OrderBy(s => s.ProductId)));
             }
 
             SetBasketItemCountInViewBag();
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { qrCodeId });
         }
 
+
         [HttpPost]
-        public IActionResult UpdateBasketItem(int productId, string action)
+        public IActionResult UpdateBasketItem(int qrCodeId, int productId, string action)
         {
-            List<BasketVM> basketVMList = JsonConvert.DeserializeObject<List<BasketVM>>(Request.Cookies[COOKIES_BASKET] ?? "[]");
+            var basketCookieName = COOKIES_BASKET + "_" + qrCodeId;
+            List<BasketVM> basketVMList = JsonConvert.DeserializeObject<List<BasketVM>>(Request.Cookies[basketCookieName] ?? "[]");
 
             BasketVM basketItem = basketVMList.FirstOrDefault(s => s.ProductId == productId);
             if (basketItem != null)
@@ -200,77 +177,90 @@ namespace QrSystem.Controllers
                     {
                         basketItem.Count--;
 
-                        // Ürün miktarını artır
+                        // Ürün miktarını azalt
                         Product product = _appDbContext.Products.FirstOrDefault(p => p.Id == productId);
                         if (product != null)
                         {
-                            product.Quantity++;
+                            product.Quantity++; // Ürün miktarını artır
                             _appDbContext.SaveChanges();
                         }
                     }
                     else
                     {
-                        basketVMList.Remove(basketItem);
-
-                        // Ürünü geri ekle
-                        Product product = _appDbContext.Products.FirstOrDefault(p => p.Id == productId);
-                        if (product != null)
-                        {
-                            product.Quantity++;
-                            _appDbContext.SaveChanges();
-                        }
+                        basketItem.Count = 1; // Ürün miktarını sadece 1 tane yap
                     }
                 }
+
+
             }
 
-            Response.Cookies.Append(COOKIES_BASKET, JsonConvert.SerializeObject(basketVMList.OrderBy(s => s.ProductId)));
+            Response.Cookies.Append(basketCookieName, JsonConvert.SerializeObject(basketVMList.OrderBy(s => s.ProductId)));
 
             SetBasketItemCountInViewBag();
 
-            return RedirectToAction("Index", "Basket");
+            return RedirectToAction("Index", new { qrCodeId });
         }
 
-
-        public IActionResult RemoveAllItemsFromBasket()
+        public IActionResult RemoveAllItemsFromBasket(int qrCodeId)
         {
+            string basketCookieName = COOKIES_BASKET + "_" + qrCodeId;
+
             // Sepet öğelerini temizle
-            Response.Cookies.Delete(COOKIES_BASKET);
+            Response.Cookies.Delete(basketCookieName);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { qrCodeId });
         }
-        public IActionResult Checkout()
+        [HttpPost]
+        public IActionResult Checkout(int qrCodeId)
         {
-            // Sepet içeriğini al
-            List<BasketİtemVM> productsInCart = GetProductsInCart();
+            // Belirli bir QR koduna sahip sepet ürünlerini al
+            List<BasketİtemVM> productsInCart = GetProductsInCart(qrCodeId);
 
-            // ViewModel oluştur
-            var viewModel = new Dictionary<string, List<BasketİtemVM>>();
+            // Sepetin onaylanması durumunda, her bir sepet için ayrı bir tablo oluşturun
+            SaveCartToDatabase(qrCodeId, productsInCart);
 
-            // Bir masa numarası belirterek ürünleri grupla
-            foreach (var product in productsInCart)
+            // Sipariş onaylandıktan sonra sepetin temizlenmesi gerekiyorsa, temizleme işlemini gerçekleştirin
+            ClearCart(qrCodeId);
+
+            return RedirectToAction("Urun", new { qrCodeId = qrCodeId });
+        }
+
+        // Sepetteki ürünleri kalıcı olarak veritabanına kaydetmek için örnek bir metot
+        private void SaveCartToDatabase(int qrCodeId, List<BasketİtemVM> productsInCart)
+        {
+            foreach (var item in productsInCart)
             {
-                if (product.TableName != null) // Check if TableName is not null
+                _appDbContext.SaxlanilanS.Add(new SaxlanilanSifarish
                 {
-                    if (!viewModel.ContainsKey(product.TableName))
-                    {
-                        viewModel[product.TableName] = new List<BasketİtemVM>();
-                    }
-                    viewModel[product.TableName].Add(product);
-                }
+                    QrCodeId = qrCodeId,
+                    Name = item.Name,
+                    Description = item.Description,
+                    Price = item.Price,
+                    ProductCount = item.ProductCount,
+                    ImagePath = item.ImagePath,
+                    TableName = item.TableName
+                });
             }
 
-            // urun.cshtml sayfasına ViewModel'i gönder
-            return View("~/Views/Basket/urun.cshtml", viewModel);
+            _appDbContext.SaveChanges();
         }
 
+        // Sepetin temizlenmesi için örnek bir metot
+        private void ClearCart(int qrCodeId)
+        {
+            var basketCookieName = COOKIES_BASKET + "_" + qrCodeId;
+            Response.Cookies.Delete(basketCookieName);
+        }
 
         // Sepetteki ürünleri almak için örnek bir metot
-        private List<BasketİtemVM> GetProductsInCart()
+        private List<BasketİtemVM> GetProductsInCart(int qrCodeId)
         {
             List<BasketİtemVM> basketItemVMs = new List<BasketİtemVM>();
-            List<BasketVM> basketVMs = JsonConvert.DeserializeObject<List<BasketVM>>(Request.Cookies[COOKIES_BASKET] ?? "[]");
 
-            foreach (BasketVM item in basketVMs)
+            var basketCookieName = COOKIES_BASKET + "_" + qrCodeId; // Her QR kodu için farklı bir cookie adı oluştur
+            List<BasketVM> basketVMs = JsonConvert.DeserializeObject<List<BasketVM>>(Request.Cookies[basketCookieName] ?? "[]");
+
+            foreach (var item in basketVMs)
             {
                 Product product = _appDbContext.Products
                     .Include(p => p.Tables)
@@ -280,22 +270,31 @@ namespace QrSystem.Controllers
                 {
                     foreach (var table in product.Tables)
                     {
-                        basketItemVMs.Add(new BasketİtemVM
+                        var existingItem = basketItemVMs.FirstOrDefault(b => b.Id == product.Id && b.TableName == table.TableNumber.ToString());
+                        if (existingItem != null)
                         {
-                            Name = product.Name,
-                            Id = product.Id,
-                            Description = product.Description,
-                            Price = product.Price,
-                            ProductCount = item.Count,
-                            ImagePath = product.ImagePath,
-                            TableName = table.TableNumber.ToString()
-                        });
+                            existingItem.ProductCount += item.Count; // Ürün zaten varsa miktarını artır
+                        }
+                        else
+                        {
+                            basketItemVMs.Add(new BasketİtemVM
+                            {
+                                Name = product.Name,
+                                Id = product.Id,
+                                Description = product.Description,
+                                Price = product.Price,
+                                ProductCount = item.Count,
+                                ImagePath = product.ImagePath,
+                                TableName = table.TableNumber.ToString()
+                            });
+                        }
                     }
                 }
             }
 
             return basketItemVMs;
         }
+
 
 
 

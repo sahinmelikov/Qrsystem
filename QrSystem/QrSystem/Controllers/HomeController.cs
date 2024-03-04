@@ -17,9 +17,8 @@ namespace QrSystem.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            // Post işleminden sonra qrCodeId değerini saklamak için ViewBag kullanabiliriz
-            // Bu sayede, post işlemi gerçekleştirilmediğinde ViewBag.QrCodeId değeri null olacaktır
-            ViewBag.QrCodeId = null;
+            var qrCodeId = HttpContext.Session.GetInt32("QrCodeId");
+            ViewBag.QrCodeId = qrCodeId;
 
             HomeVM homeVM = new HomeVM()
             {
@@ -33,8 +32,10 @@ namespace QrSystem.Controllers
         [HttpPost]
         public IActionResult Index(int qrCodeId)
         {
+            HttpContext.Session.SetInt32("QrCodeId", qrCodeId);
+           
             // Post işleminden sonra qrCodeId değerini saklayalım
-            ViewBag.QrCodeId = qrCodeId;
+          ViewBag.QrCodeId = qrCodeId;
 
             var masa = _appDbContext.Tables.FirstOrDefault(m => m.QrCodeId == qrCodeId);
 

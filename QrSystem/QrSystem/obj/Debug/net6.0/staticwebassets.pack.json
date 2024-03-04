@@ -5,12 +5,316 @@
       "PackagePath": "staticwebassets\\QrSystem.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\cdn-cgi\\apps\\head\\Gd6MZLBdeI8JqGMYwGDOkaXYMCo.js",
+      "PackagePath": "staticwebassets\\cdn-cgi\\apps\\head\\Gd6MZLBdeI8JqGMYwGDOkaXYMCo.js"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\cdn-cgi\\l\\email-protection.html",
+      "PackagePath": "staticwebassets\\cdn-cgi\\l\\email-protection.html"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\cdn-cgi\\scripts\\5c5dd728\\cloudflare-static\\email-decode.min.js",
+      "PackagePath": "staticwebassets\\cdn-cgi\\scripts\\5c5dd728\\cloudflare-static\\email-decode.min.js"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\cdn-cgi\\scripts\\7d0fa10a\\cloudflare-static\\rocket-loader.min.js",
+      "PackagePath": "staticwebassets\\cdn-cgi\\scripts\\7d0fa10a\\cloudflare-static\\rocket-loader.min.js"
+    },
+    {
       "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
       "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\frontend\\css\\discount.css",
+      "PackagePath": "staticwebassets\\frontend\\css\\discount.css"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\frontend\\css\\main65bf.css",
+      "PackagePath": "staticwebassets\\frontend\\css\\main65bf.css"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\frontend\\css\\mega-menu65bf.css",
+      "PackagePath": "staticwebassets\\frontend\\css\\mega-menu65bf.css"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\frontend\\css\\mobile65bf.css",
+      "PackagePath": "staticwebassets\\frontend\\css\\mobile65bf.css"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\frontend\\css\\post6654.css",
+      "PackagePath": "staticwebassets\\frontend\\css\\post6654.css"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\frontend\\css\\reset.css",
+      "PackagePath": "staticwebassets\\frontend\\css\\reset.css"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\frontend\\css\\responsive65bf.css",
+      "PackagePath": "staticwebassets\\frontend\\css\\responsive65bf.css"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\frontend\\css\\style65bf.css",
+      "PackagePath": "staticwebassets\\frontend\\css\\style65bf.css"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\frontend\\font-azn\\jaznr.eot",
+      "PackagePath": "staticwebassets\\frontend\\font-azn\\jaznr.eot"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\frontend\\font-azn\\jaznr.svg",
+      "PackagePath": "staticwebassets\\frontend\\font-azn\\jaznr.svg"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\frontend\\font-azn\\jaznr.ttf",
+      "PackagePath": "staticwebassets\\frontend\\font-azn\\jaznr.ttf"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\frontend\\font-azn\\jaznr.woff",
+      "PackagePath": "staticwebassets\\frontend\\font-azn\\jaznr.woff"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\frontend\\font-azn\\jaznrd41d.eot",
+      "PackagePath": "staticwebassets\\frontend\\font-azn\\jaznrd41d.eot"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\frontend\\image\\badge.png",
+      "PackagePath": "staticwebassets\\frontend\\image\\badge.png"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\frontend\\image\\badgen1.png",
+      "PackagePath": "staticwebassets\\frontend\\image\\badgen1.png"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\frontend\\image\\badgen2.png",
+      "PackagePath": "staticwebassets\\frontend\\image\\badgen2.png"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\frontend\\image\\badgen3.png",
+      "PackagePath": "staticwebassets\\frontend\\image\\badgen3.png"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\frontend\\image\\basket.png",
+      "PackagePath": "staticwebassets\\frontend\\image\\basket.png"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\frontend\\image\\catalog.png",
+      "PackagePath": "staticwebassets\\frontend\\image\\catalog.png"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\frontend\\image\\endirim.png",
+      "PackagePath": "staticwebassets\\frontend\\image\\endirim.png"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\frontend\\image\\garland.png",
+      "PackagePath": "staticwebassets\\frontend\\image\\garland.png"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\frontend\\image\\left.png",
+      "PackagePath": "staticwebassets\\frontend\\image\\left.png"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\frontend\\image\\login.png",
+      "PackagePath": "staticwebassets\\frontend\\image\\login.png"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\frontend\\image\\mega-e.png",
+      "PackagePath": "staticwebassets\\frontend\\image\\mega-e.png"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\frontend\\image\\menu-icon-hover.png",
+      "PackagePath": "staticwebassets\\frontend\\image\\menu-icon-hover.png"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\frontend\\image\\menu-icon.png",
+      "PackagePath": "staticwebassets\\frontend\\image\\menu-icon.png"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\frontend\\image\\sebet.png",
+      "PackagePath": "staticwebassets\\frontend\\image\\sebet.png"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\frontend\\image\\sebet_dark.png",
+      "PackagePath": "staticwebassets\\frontend\\image\\sebet_dark.png"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\frontend\\image\\select.png",
+      "PackagePath": "staticwebassets\\frontend\\image\\select.png"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\frontend\\image\\user.png",
+      "PackagePath": "staticwebassets\\frontend\\image\\user.png"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\frontend\\images\\whatsapp.html",
+      "PackagePath": "staticwebassets\\frontend\\images\\whatsapp.html"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\frontend\\js\\auth-modals65bf.js",
+      "PackagePath": "staticwebassets\\frontend\\js\\auth-modals65bf.js"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\frontend\\js\\cart65bf.js",
+      "PackagePath": "staticwebassets\\frontend\\js\\cart65bf.js"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\frontend\\js\\detail-view.js",
+      "PackagePath": "staticwebassets\\frontend\\js\\detail-view.js"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\frontend\\js\\inputmask\\dist\\bindings\\inputmask.binding.js",
+      "PackagePath": "staticwebassets\\frontend\\js\\inputmask\\dist\\bindings\\inputmask.binding.js"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\frontend\\js\\inputmask\\dist\\inputmask.min.js",
+      "PackagePath": "staticwebassets\\frontend\\js\\inputmask\\dist\\inputmask.min.js"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\frontend\\js\\inputmask\\dist\\jquery.inputmask.min.js",
+      "PackagePath": "staticwebassets\\frontend\\js\\inputmask\\dist\\jquery.inputmask.min.js"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\frontend\\js\\jquery-2.2.0.min.js",
+      "PackagePath": "staticwebassets\\frontend\\js\\jquery-2.2.0.min.js"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\frontend\\js\\main65bf.js",
+      "PackagePath": "staticwebassets\\frontend\\js\\main65bf.js"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\frontend\\js\\mega-menu65bf.js",
+      "PackagePath": "staticwebassets\\frontend\\js\\mega-menu65bf.js"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\frontend\\js\\order65bf.js",
+      "PackagePath": "staticwebassets\\frontend\\js\\order65bf.js"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\frontend\\js\\popper\\popper.min.js",
+      "PackagePath": "staticwebassets\\frontend\\js\\popper\\popper.min.js"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\frontend\\plugins\\bootstrap-icons\\bootstrap-icons.css",
+      "PackagePath": "staticwebassets\\frontend\\plugins\\bootstrap-icons\\bootstrap-icons.css"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\frontend\\plugins\\bootstrap-icons\\fonts\\bootstrap-iconsf114.woff",
+      "PackagePath": "staticwebassets\\frontend\\plugins\\bootstrap-icons\\fonts\\bootstrap-iconsf114.woff"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\frontend\\plugins\\bootstrap-icons\\fonts\\bootstrap-iconsf114.woff2",
+      "PackagePath": "staticwebassets\\frontend\\plugins\\bootstrap-icons\\fonts\\bootstrap-iconsf114.woff2"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\frontend\\plugins\\bootstrap4\\bootstrap.min.js",
+      "PackagePath": "staticwebassets\\frontend\\plugins\\bootstrap4\\bootstrap.min.js"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\frontend\\plugins\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\frontend\\plugins\\bootstrap\\dist\\css\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\frontend\\plugins\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "PackagePath": "staticwebassets\\frontend\\plugins\\bootstrap\\dist\\js\\bootstrap.min.js"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\frontend\\plugins\\fontawesome\\css\\all.css",
+      "PackagePath": "staticwebassets\\frontend\\plugins\\fontawesome\\css\\all.css"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\frontend\\plugins\\fontawesome\\webfonts\\fa-brands-400.ttf",
+      "PackagePath": "staticwebassets\\frontend\\plugins\\fontawesome\\webfonts\\fa-brands-400.ttf"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\frontend\\plugins\\fontawesome\\webfonts\\fa-brands-400.woff2",
+      "PackagePath": "staticwebassets\\frontend\\plugins\\fontawesome\\webfonts\\fa-brands-400.woff2"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\frontend\\plugins\\fontawesome\\webfonts\\fa-regular-400.ttf",
+      "PackagePath": "staticwebassets\\frontend\\plugins\\fontawesome\\webfonts\\fa-regular-400.ttf"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\frontend\\plugins\\fontawesome\\webfonts\\fa-regular-400.woff2",
+      "PackagePath": "staticwebassets\\frontend\\plugins\\fontawesome\\webfonts\\fa-regular-400.woff2"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\frontend\\plugins\\fontawesome\\webfonts\\fa-solid-900.ttf",
+      "PackagePath": "staticwebassets\\frontend\\plugins\\fontawesome\\webfonts\\fa-solid-900.ttf"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\frontend\\plugins\\fontawesome\\webfonts\\fa-solid-900.woff2",
+      "PackagePath": "staticwebassets\\frontend\\plugins\\fontawesome\\webfonts\\fa-solid-900.woff2"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\frontend\\plugins\\fontawesome\\webfonts\\fa-v4compatibility.ttf",
+      "PackagePath": "staticwebassets\\frontend\\plugins\\fontawesome\\webfonts\\fa-v4compatibility.ttf"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\frontend\\plugins\\fontawesome\\webfonts\\fa-v4compatibility.woff2",
+      "PackagePath": "staticwebassets\\frontend\\plugins\\fontawesome\\webfonts\\fa-v4compatibility.woff2"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\frontend\\plugins\\slick\\ajax-loader.gif",
+      "PackagePath": "staticwebassets\\frontend\\plugins\\slick\\ajax-loader.gif"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\frontend\\plugins\\slick\\fonts\\slick.eot",
+      "PackagePath": "staticwebassets\\frontend\\plugins\\slick\\fonts\\slick.eot"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\frontend\\plugins\\slick\\fonts\\slick.svg",
+      "PackagePath": "staticwebassets\\frontend\\plugins\\slick\\fonts\\slick.svg"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\frontend\\plugins\\slick\\fonts\\slick.ttf",
+      "PackagePath": "staticwebassets\\frontend\\plugins\\slick\\fonts\\slick.ttf"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\frontend\\plugins\\slick\\fonts\\slick.woff",
+      "PackagePath": "staticwebassets\\frontend\\plugins\\slick\\fonts\\slick.woff"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\frontend\\plugins\\slick\\fonts\\slickd41d.eot",
+      "PackagePath": "staticwebassets\\frontend\\plugins\\slick\\fonts\\slickd41d.eot"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\frontend\\plugins\\slick\\slick-theme.css",
+      "PackagePath": "staticwebassets\\frontend\\plugins\\slick\\slick-theme.css"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\frontend\\plugins\\slick\\slick.css",
+      "PackagePath": "staticwebassets\\frontend\\plugins\\slick\\slick.css"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\frontend\\plugins\\slick\\slick.js",
+      "PackagePath": "staticwebassets\\frontend\\plugins\\slick\\slick.js"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\frontend\\plugins\\toastr\\toastr.min.css",
+      "PackagePath": "staticwebassets\\frontend\\plugins\\toastr\\toastr.min.css"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\frontend\\plugins\\toastr\\toastr.min.js",
+      "PackagePath": "staticwebassets\\frontend\\plugins\\toastr\\toastr.min.js"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\frontend\\plugins\\zoom\\jquery.zoom.min.js",
+      "PackagePath": "staticwebassets\\frontend\\plugins\\zoom\\jquery.zoom.min.js"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\frontend\\wpchatplugin\\wpchat.css",
+      "PackagePath": "staticwebassets\\frontend\\wpchatplugin\\wpchat.css"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\frontend\\wpchatplugin\\wpchat.js",
+      "PackagePath": "staticwebassets\\frontend\\wpchatplugin\\wpchat.js"
+    },
+    {
+      "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\frontend\\wpchatplugin\\wpchatcustom.css",
+      "PackagePath": "staticwebassets\\frontend\\wpchatplugin\\wpchatcustom.css"
     },
     {
       "Id": "C:\\Users\\sahin\\Desktop\\QrSystem\\QrSystem\\QrSystem\\wwwroot\\js\\site.js",

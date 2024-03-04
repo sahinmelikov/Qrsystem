@@ -1,0 +1,173 @@
+.blog_list {
+    background-color: white;
+}
+
+.bl_item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+}
+
+.bl_item a {
+    display: inline-flex;
+    width: 100%;
+    word-break: break-word;
+}
+
+.bli_image,
+.bli_info,
+.bli_title,
+.bli_desc,
+.bli_link {
+    width: 100%;
+    display: flex;
+    margin: 0px;
+    padding: 0px;
+    word-break: break-word;
+}
+
+.bli_image {
+    height: 195px;
+    object-fit: cover;
+}
+
+.bli_info {
+    height: 40px;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 2px solid #ddd;
+}
+
+.blii_date,
+.blii_view {
+    font: 13px Arial;
+    color: #000;
+}
+
+.bli_title {
+    font: bold 17px Arial;
+    color: #000;
+    padding: 5px 0px;
+    word-break: break-word;
+}
+
+.bli_desc {
+    font: 14px Arial;
+    color: #a5a5a5;
+}
+
+.bli_link {
+    padding-top: 10px;
+    justify-content: end;
+    color: #3a8800;
+    font: 14px Arial;
+    text-transform: lowercase;
+}
+
+.bl_item a:hover,
+.bl_item a:hover h1 {
+    color: #1f4900;
+}
+
+/* Details page */
+.mi_list_container {
+    margin: 0;
+    padding: 0;
+}
+
+.milc_title {
+    width: 100%;
+    font: bold 13px Arial;
+    text-transform: uppercase;
+    margin: 0px 0px 9px;
+}
+
+.milc_item {
+    width: 100%;
+    padding: 6px 0px;
+    display: flex;
+    margin: 0px;
+}
+
+.milci_image {
+    height: 65px;
+    object-fit: fill;
+    padding: 0px;
+}
+
+/* .milci_container {} */
+
+.milcic_time {
+    display: block;
+    font: 12px Arial;
+    color: #848484;
+}
+
+.milcic_link {
+    font: bold 13px Arial;
+    display: inline-flex;
+    word-break: break-word;
+}
+
+.mi_description {
+    width: 100%;
+}
+
+.mid_main_image {
+    width: 100%;
+    height: 430px;
+    object-fit: contain;
+    margin-bottom: 15px;
+}
+
+.mid_information {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.midi_time {
+    display: inline-flex;
+    font: 13px Arial;
+    align-items: center;
+}
+
+.mid_title {
+    font: bold 29px Arial;
+    padding: 10px 0px;
+    word-break: break-word;
+}
+
+.mid_content {
+    font: 14px/20px Arial;
+    word-break: break-word;
+    margin-bottom: 10px;
+}
+
+.mid_content a {
+    color: #0d6efd;
+    text-decoration: none;
+}
+
+.mid_content a:hover {
+    color: #ff4747;
+    text-decoration: none;
+}
+
+.mid_content img {
+    width: 100% !important;
+}
+
+.mid_images {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+.midimg_item {
+    width: 50%;
+    height: 150px;
+    object-fit: contain;
+    padding: 10px;
+}

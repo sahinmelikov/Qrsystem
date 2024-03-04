@@ -31,6 +31,8 @@
     <meta http-equiv="content-language" content="az">
     <meta name="csrf-token" content="M85N5au8EFw5fIHoVDq1Xt78R8PfgeUVuUse8pdt" />
     <script src="../../cdn-cgi/apps/head/Gd6MZLBdeI8JqGMYwGDOkaXYMCo.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
     <link rel="icon" type="image/x-icon" href="../../favicon.ico">
     <meta name="theme-color" content="#232f3e" />
     <meta name="robots" content="noindex, nofollow" />
@@ -46,7 +48,22 @@
     <link href="https://www.arizon.az/frontend/plugins/slick/slick-theme.css" rel="stylesheet" type="text/css">
     <link href="https://www.arizon.az/frontend/plugins/fontawesome/css/all.css" rel="stylesheet" type="text/css" />
     <link href="https://www.arizon.az/frontend/css/mobile.css?v27" rel="stylesheet" type="text/css" />
+    <link href="~/frontend/plugins/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="~/frontend/plugins/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" type="text/css">
+    <link href="~/frontend/plugins/toastr/toastr.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/frontend/css/main65bf.css?v27" rel="stylesheet" type="text/css" />
+    <link href="~/frontend/css/reset.css" rel="stylesheet" type="text/css" />
+    <link href="~/frontend/css/style65bf.css?v27" rel="stylesheet" type="text/css" />
+    <link href="~/frontend/css/mega-menu65bf.css?v27" rel="stylesheet" type="text/css" />
+    <link href="~/frontend/css/responsive65bf.css?v27" rel="stylesheet" type="text/css" />
+    <link href="~/frontend/plugins/slick/slick.css" rel="stylesheet" type="text/css">
+    <link href="~/frontend/plugins/slick/slick-theme.css" rel="stylesheet" type="text/css">
+    <link href="~/frontend/plugins/fontawesome/css/all.css" rel="stylesheet" type="text/css" />
+    <link href="~/frontend/css/mobile65bf.css?v27" rel="stylesheet" type="text/css" />
 
+    <link href="~/frontend/wpchatplugin/wpchat.css" rel="stylesheet">
+    <link href="~/frontend/wpchatplugin/wpchatcustom.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/frontend/css/discount.css">
     <link href="https://www.arizon.az/frontend/wpchatplugin/wpchat.css" rel="stylesheet">
     <link href="https://www.arizon.az/frontend/wpchatplugin/wpchatcustom.css" rel="stylesheet">
 
@@ -79,24 +96,26 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" id="select-all">
                                 <label class="form-check-label mt-1" for="select-all">
-                                    Hamısını seç
+                                    Hamısını sil
                                     </labe>
                             </div>
                         </div>
                         <div class="trash_">
                             <div class="btn trash">
                                 <i class="fa-regular fa-trash-can" style="color: #ff4747"></i>
-                                Seçilənləri sil (<span class="selected-product-count">0</span>)
+                                Hamısını sil (<span class="selected-product-count">0</span>)
                             </div>
                             <form class="cart-selected-item-delete" action="@Url.Action("RemoveAllItemsFromBasket", "Basket")" method="post">
-                                <input type="hidden" name="_token" value="UVDsOAzAS7pK5VA0SyeTAexfoFziZCWSEiMvXcLP"> <input type="hidden" name="_method" value="DELETE"> <div class="trash-menu text-center" style="display: none;">
-                                    <p class="mb-3">Məhsulu səbətdən  sil></p>
-
+                                <input type="hidden" name="qrCodeId" value="@Model.FirstOrDefault()?.QrCodeId" />
+                                <input type="hidden" name="_token" value="UVDsOAzAS7pK5VA0SyeTAexfoFziZCWSEiMvXcLP">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <div class="trash-menu text-center" style="display: none;">
+                                    <p class="mb-3">Məhsulu səbətdən silmək istədiyinizə əminsiniz?</p>
                                     <button type="submit" class="button-bg">Bəli</button>
-
                                     <button type="reset" class="button-border">Xeyr</button>
                                 </div>
                             </form>
+
                         </div>
                     </div>
                     <div class="product-all">
@@ -118,34 +137,41 @@
                                             <div class="button input d-flex basket-count">
                                                 <form action="/Basket/UpdateBasketItem" method="post" class="cart-item-update">
                                                     @Html.Hidden("productId", item.Id)
+                                                    @Html.Hidden("qrCodeId", item.QrCodeId)
                                                     <!-- Ürün miktarını güncelleme formu -->
+
                                                     <button type="submit" class="dec" name="action" value="decrement">-</button>
                                                     <input type="text" name="quantity" value="@item.ProductCount" id="miktar_@item.Id" readonly>
                                                     <button type="submit" class="inc" name="action" value="increment">+</button>
                                                 </form>
+
+
                                             </div>
                                             <div class="trash_">
                                                 <div class="btn trash"><i class="fa-regular fa-trash-can" style="color: #ff4747"></i></div>
-                                                <form class="cart-item-delete">
-                                                    <input type="hidden" name="_token" value="UVDsOAzAS7pK5VA0SyeTAexfoFziZCWSEiMvXcLP">
-                                                    <input type="hidden" name="_method" value="DELETE">
-                                                    <input type="hidden" name="id" value="@item.Id">
+                                                <form class="cart-item-delete" action="/Basket/RemoveItemFromBasket" method="post">
+                                                    @Html.Hidden("id", item.Id)
+                                                    @Html.Hidden("qrCodeId", item.QrCodeId) <!-- QR kodu bilgisini gizli alanda tut -->
                                                     <div class="trash-menu text-center" style="display: none;">
                                                         <p class="mb-3">Məhsulu səbətdən silmək istədiyinizə əminsiniz?</p>
                                                         <p>@ViewBag.MyData</p>
-                                                        <a asp-route-id="@item.Id" asp-action="RemoveItemFromBasket" class="button-border" type="submit">Bəli</a>
+                                                        <button type="submit" class="button-border">Bəli</button>
                                                         <button type="reset" class="button-border">Xeyr</button>
                                                     </div>
                                                 </form>
                                             </div>
+
+
+
                                         </div>
                                     </div>
                                 </div>
                                 <div class="status text-end">
-                                    <p class="old_price">@item.Price <i class="icon-azn">M</i></p>
+                                    <p class="">@((item.Price * item.ProductCount).ToString("N2")) <i class="icon-azn">M</i></p>
+
                                     <p id="fiyat_@item.Id" class="price">
                                        
-                                        <i class="icon-azn">M</i>
+                                        
                                     </p>
                                  
                                 </div>
@@ -159,9 +185,13 @@
                 </div>
                 <div class="col-lg-4 col-12">
                     <div class="total">
-                        <form action="https://www.arizon.az/cart-processes" method="post" class="cart-processes">
-                            <input type="hidden" name="_token" value="UVDsOAzAS7pK5VA0SyeTAexfoFziZCWSEiMvXcLP"> <h2 class="basket-page-title ">Səbətim</h2>
-                            <button type="button" class="cart-next-btn" onclick="window.location.href = '@Url.Action("Checkout", "Basket")'">Siparişinizi Onaylayın</button>
+                        <form asp-action="Checkout" asp-route-qrCodeId="@ViewBag.QrCodeId" method="post" class="cart-processes">
+                           
+                            <h2 class="basket-page-title">Səbətim</h2>
+                            <button type="submit" class="cart-next-btn">Siparişinizi Onaylayın</button>
+
+
+                      
 
 
                             @foreach (var item in Model)
@@ -208,6 +238,95 @@
             </div>
         </div>
     </div>
+    <script src="~/frontend/js/jquery-2.2.0.min.js" type="4f6d53ce8e44ccfacace5e22-text/javascript"></script>
+    <script src="~/frontend/js/popper/popper.min.js" type="4f6d53ce8e44ccfacace5e22-text/javascript"></script>
+    <script src="~/frontend/plugins/bootstrap/dist/js/bootstrap.min.js" type="4f6d53ce8e44ccfacace5e22-text/javascript"></script>
+    <script src="~/frontend/plugins/bootstrap4/bootstrap.min.js" type="4f6d53ce8e44ccfacace5e22-text/javascript"></script>
+    <script src="~/frontend/plugins/slick/slick.js" type="4f6d53ce8e44ccfacace5e22-text/javascript" charset="utf-8"></script>
+    <script src="~/frontend/plugins/toastr/toastr.min.js" type="4f6d53ce8e44ccfacace5e22-text/javascript"></script>
+    <script src="~/frontend/js/main65bf.js?v27" type="4f6d53ce8e44ccfacace5e22-text/javascript"></script>
+    <script src="backend/plugins/jquery-validation/jquery.validate.min.js" type="4f6d53ce8e44ccfacace5e22-text/javascript"></script>
+    <script src="backend/plugins/jquery-validation/additional-methods.min.js" type="4f6d53ce8e44ccfacace5e22-text/javascript"></script>
+    <script src="backend/plugins/jquery-form/jquery.form.min.js" type="4f6d53ce8e44ccfacace5e22-text/javascript"></script>
+    <script src="~/frontend/js/auth-modals65bf.js?v27" type="4f6d53ce8e44ccfacace5e22-text/javascript"></script>
+    <script src="~/frontend/js/cart65bf.js?v27" type="4f6d53ce8e44ccfacace5e22-text/javascript"></script>
+    <script src="~/frontend/js/order65bf.js?v27" type="4f6d53ce8e44ccfacace5e22-text/javascript"></script>
+    <script src="~/frontend/js/mega-menu65bf.js?v27" type="4f6d53ce8e44ccfacace5e22-text/javascript"></script>
+    <script src="~/frontend/js/inputmask/dist/inputmask.min.js" type="4f6d53ce8e44ccfacace5e22-text/javascript"></script>
+    <script src="~/frontend/js/inputmask/dist/jquery.inputmask.min.js" type="4f6d53ce8e44ccfacace5e22-text/javascript"></script>
+    <script src="~/frontend/js/inputmask/dist/bindings/inputmask.binding.js" type="4f6d53ce8e44ccfacace5e22-text/javascript"></script>
+    <script type="4f6d53ce8e44ccfacace5e22-text/javascript">
+        $(function(){
+            $('.more.next-btn').on('click', function () {
+                let page = $('.more.next-btn').attr('data-page');
+
+                $.post('az/home/all/product.html', {
+                    '_token': 'M85N5au8EFw5fIHoVDq1Xt78R8PfgeUVuUse8pdt',
+                    '_method': 'POST',
+                    'page': page
+                }, function(response){
+                    if(response.status === 'success') {
+                        $('#all-product-content').append(response.products);
+                        if (response.next === true) {
+                            $('.more.next-btn').removeClass('d-none');
+                            $('.more.next-btn').attr('data-page', response.page);
+                        } else {
+                            $('.more.next-btn').addClass('d-none');
+                        }
+                        // add to cart
+                        add_to_cart($('.add-to-cart'), function (response) {
+                            if (response.status === 'success') {
+                                get_cart();
+                                $(".products-menu.choose-submenu2").hide().slideDown('slow');
+                                toastr.success('Səbətə əlavə olundu!', '', {
+                                    "positionClass": "toast-top-center",
+                                    "showDuration": "300",
+                                    "hideDuration": "1000",
+                                    "timeOut": "5000",
+                                    "extendedTimeOut": "1000",
+                                    "showEasing": "swing",
+                                    "hideEasing": "linear",
+                                    "showMethod": "fadeIn",
+                                    "hideMethod": "fadeOut"
+                                });
+                            }
+                        });
+                    } else {
+                        $('.more.next-btn').addClass('d-none');
+                    }
+                });
+            });
+        });
+    </script>
+    <script type="4f6d53ce8e44ccfacace5e22-text/javascript" id="chaty-front-end-js-extra">
+        /* <![CDATA[ */
+        var chaty_settings = {"object_settings":{"isPRO":0,"pending_messages":"off","cht_cta_bg_color":"#ffffff","cht_cta_text_color":"rgb(17, 14, 183)","click_setting":"all_time","number_of_messages":"1","number_color":"#ffffff","number_bg_color":"#dd0000","position":"left","social":[{"val":"9940702028066","default_icon":"<svg class=\"ico_d \" width=\"39\" height=\"39\" viewBox=\"0 0 39 39\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\" style=\"transform: rotate(0deg);\"><circle class=\"color-element\" cx=\"19.4395\" cy=\"19.4395\" r=\"19.4395\" fill=\"#49E670\"\/><path d=\"M12.9821 10.1115C12.7029 10.7767 11.5862 11.442 10.7486 11.575C10.1902 11.7081 9.35269 11.8411 6.84003 10.7767C3.48981 9.44628 1.39593 6.25317 1.25634 6.12012C1.11674 5.85403 2.13001e-06 4.39053 2.13001e-06 2.92702C2.13001e-06 1.46351 0.83755 0.665231 1.11673 0.399139C1.39592 0.133046 1.8147 1.01506e-06 2.23348 1.01506e-06C2.37307 1.01506e-06 2.51267 1.01506e-06 2.65226 1.01506e-06C2.93144 1.01506e-06 3.21063 -2.02219e-06 3.35022 0.532183C3.62941 1.19741 4.32736 2.66092 4.32736 2.79397C4.46696 2.92702 4.46696 3.19311 4.32736 3.32616C4.18777 3.59225 4.18777 3.59224 3.90858 3.85834C3.76899 3.99138 3.6294 4.12443 3.48981 4.39052C3.35022 4.52357 3.21063 4.78966 3.35022 5.05576C3.48981 5.32185 4.18777 6.38622 5.16491 7.18449C6.42125 8.24886 7.39839 8.51496 7.81717 8.78105C8.09636 8.91409 8.37554 8.9141 8.65472 8.648C8.93391 8.38191 9.21309 7.98277 9.49228 7.58363C9.77146 7.31754 10.0507 7.1845 10.3298 7.31754C10.609 7.45059 12.2841 8.11582 12.5633 8.38191C12.8425 8.51496 13.1217 8.648 13.1217 8.78105C13.1217 8.78105 13.1217 9.44628 12.9821 10.1115Z\" transform=\"translate(12.9597 12.9597)\" fill=\"#FAFAFA\"\/><path d=\"M0.196998 23.295L0.131434 23.4862L0.323216 23.4223L5.52771 21.6875C7.4273 22.8471 9.47325 23.4274 11.6637 23.4274C18.134 23.4274 23.4274 18.134 23.4274 11.6637C23.4274 5.19344 18.134 -0.1 11.6637 -0.1C5.19344 -0.1 -0.1 5.19344 -0.1 11.6637C-0.1 13.9996 0.624492 16.3352 1.93021 18.2398L0.196998 23.295ZM5.87658 19.8847L5.84025 19.8665L5.80154 19.8788L2.78138 20.8398L3.73978 17.9646L3.75932 17.906L3.71562 17.8623L3.43104 17.5777C2.27704 15.8437 1.55796 13.8245 1.55796 11.6637C1.55796 6.03288 6.03288 1.55796 11.6637 1.55796C17.2945 1.55796 21.7695 6.03288 21.7695 11.6637C21.7695 17.2945 17.2945 21.7695 11.6637 21.7695C9.64222 21.7695 7.76778 21.1921 6.18227 20.039L6.17557 20.0342L6.16817 20.0305L5.87658 19.8847Z\" transform=\"translate(7.7758 7.77582)\" fill=\"white\" stroke=\"white\" stroke-width=\"0.2\"\/><\/svg>","bg_color":"#49E670","rbg_color":"73,230,112","title":"","img_url":"","social_channel":"whatsapp","channel_type":"whatsapp","href_url":"javascript:;","desktop_target":"_blank","mobile_target":"","qr_code_image":"","channel":"Whatsapp","is_mobile":1,"is_desktop":1,"mobile_url":"javascript:;","on_click":"","has_font":0,"popup_html":"<div class='chaty-whatsapp-popup'><span class='default-value' style='display:none'><\/span><span class='default-msg-value' style='display:none'>&lt;p&gt;Salam siz\u0259 nec\u0259 k\u00f6m\u0259k ed\u0259 bil\u0259rik? :)&lt;\/p&gt;<\/span><span class='default-msg-phone' style='display:none'>9940702028066<\/span><div class='chaty-whatsapp-body'><div role='button' class='close-chaty-popup is-whatsapp-btn'><div class='chaty-close-button'><\/div><\/div><div class='chaty-whatsapp-message'><\/div><\/div><div class='chaty-whatsapp-footer'><form class='whatsapp-chaty-form' autocomplete='off' target='_blank' action='https:\/\/wa.me\/9940702028066' method='get'><div class='chaty-whatsapp-field'><input autocomplete='off' class='chaty-whatsapp-msg' name='text' value='' \/><\/div><input type='hidden' name='phone' class='chaty-whatsapp-phone' value='' \/><input type='hidden' class='is-default-open' value='0' \/><input type='hidden' class='channel-id' value='cht-channel-0' \/><button type='submit' class='chaty-whatsapp-submit-btn'><svg xmlns='http:\/\/www.w3.org\/2000\/svg' viewBox='0 0 24 24' width='24' height='24'><path fill='#ffffff' d='M1.101 21.757L23.8 12.028 1.101 2.3l.011 7.912 13.623 1.816-13.623 1.817-.011 7.912z'><\/path><\/svg><\/button><div style='clear:both'><\/div><\/form><\/div><\/div>","has_custom_popup":1,"is_default_open":0}],"pos_side":"right","bot":"25","side":"25","device":"desktop_active mobile_active","color":"#4F6ACA","rgb_color":"79,106,202","widget_size":"54","widget_type":"chat-bubble","widget_img":"","cta":"","active":"true","close_text":"Ba\u011fla","analytics":0,"save_user_clicks":0,"close_img":"","is_mobile":0,"animation_class":"waggle","time_trigger":"yes","trigger_time":"0","exit_intent":"no","on_page_scroll":"no","page_scroll":"0","gmt":"","display_conditions":0,"display_rules":[],"display_state":"click","has_close_button":"yes","mode":"vertical"}};
+        /* ]]> */
+    </script>
+    <script type="4f6d53ce8e44ccfacace5e22-text/javascript" src="~/frontend/wpchatplugin/wpchat.js" id="chaty-front-end-js"></script>
+    <script src="http://code-eu1.jivosite.com/widget/ifoWQoNcog" async type="4f6d53ce8e44ccfacace5e22-text/javascript"></script>
+    <script>
+        $(function () {
+            // + Butonuna tıklandığında AJAX isteği gönder
+            $('#addToBasketButton').click(function () {
+                var productId = $(this).data('product-id');
+
+                $.ajax({
+                    url: '/Home/AddBasket/' + productId,
+                    type: 'POST',
+                    success: function (result) {
+                        // Sepet güncellendikten sonra ürün sayısını yenile
+                        $('#basketItemCount').text(result);
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
+            });
+        });
+    </script>
+    <script src="~/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="4f6d53ce8e44ccfacace5e22-|49" defer></script>
+    <script src="~/js/custom.js"></script>
 </main>
 </html>
 

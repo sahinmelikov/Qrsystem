@@ -1,44 +1,30 @@
-﻿@using QrSystem.ViewModel
-@model Dictionary<string, List<BasketİtemVM>>
+﻿@foreach (var qrCodeId in Model.Keys)
+{
+    var masa = Model[qrCodeId].FirstOrDefault()?.TableName;
+    <h3>Masa @masa</h3>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sepet</title>
-</head>
-<body>
-    <h2>Sepetinizdeki Ürünler</h2>
-
-    @foreach (var table in Model)
-    {
-        <h3>Masa @table.Key</h3>
-        <table class="table">
-            <thead>
+    <table class="table">
+        <!-- Tablo başlıkları buraya eklenebilir -->
+        <thead>
+            <tr>
+                <th>Ürün Adı</th>
+                <th>Açıklama</th>
+                <th>Fiyat</th>
+                <th>Miktar</th>
+                <th>Görsel</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model[qrCodeId])
+            {
                 <tr>
-                    <th>Ürün Adı</th>
-                    <th>Açıklama</th>
-                    <th>Fiyat</th>
-                    <th>Miktar</th>
-                    <th>Görsel</th>
+                    <td>@product.Name</td>
+                    <td>@product.Description</td>
+                    <td>@product.Price.ToString("C2")</td>
+                    <td>@product.ProductCount</td>
+                    <td><img src="@product.ImagePath" alt="@product.Name" width="100" height="100" /></td>
                 </tr>
-            </thead>
-            <tbody>
-                @foreach (var product in table.Value)
-                {
-                    <tr>
-                        <td>@product.Name</td>
-                        <td>@product.Description</td>
-                        <td>@product.Price.ToString("C2")</td>
-                        <td>@product.ProductCount</td>
-                        <td><img src="@product.ImagePath" alt="@product.Name" width="100" height="100" /></td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    }
-
-    <!-- Diğer içerikler -->
-</body>
-</html>
+            }
+        </tbody>
+    </table>
+}
