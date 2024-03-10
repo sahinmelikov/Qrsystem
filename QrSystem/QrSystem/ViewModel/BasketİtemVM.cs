@@ -15,7 +15,7 @@ namespace QrSystem.ViewModel
         public int QrCodeId { get; set; }
         public int ProductId { get; set; }
         [Required]
-
+        public bool IsApproved { get; set; }
         public string ImagePath { get; set; }
         [Required]
         public int ProductCount { get; set; }

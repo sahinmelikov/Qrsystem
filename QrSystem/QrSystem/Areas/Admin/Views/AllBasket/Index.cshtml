@@ -1,0 +1,25 @@
+﻿@model IEnumerable<SaxlanilanSifarish>
+    <table class="table">
+        <!-- Tablo başlıkları buraya eklenebilir -->
+        <thead>
+            <tr>
+                <th>Ürün Adı</th>
+                <th>Açıklama</th>
+                <th>Fiyat</th>
+                <th>Miktar</th>
+                <th>Görsel</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var product in (Model ?? new List<SaxlanilanSifarish>()))
+            {
+                <tr>
+                    <td>@product.Name</td>
+                    <td>@product.Description</td>
+                    <td>@product.Price.ToString("C2")</td>
+                    <td>@product.ProductCount</td>
+                    <td><img src="@product.ImagePath" alt="@product.Name" width="100" height="100" /></td>
+                </tr>
+            }
+        </tbody>l
+    </table>

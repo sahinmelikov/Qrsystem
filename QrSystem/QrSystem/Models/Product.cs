@@ -9,6 +9,7 @@
         public int Quantity { get; set; }
         public string ImagePath { get; set; }
         public List<RestourantTables> Tables { get; set; }
-
+        public ParentsCategory ParentsCategory { get; set; }
+        public int ParentsCategoryId { get; set; }
     }
 }

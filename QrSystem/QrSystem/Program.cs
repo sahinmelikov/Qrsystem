@@ -11,8 +11,9 @@ builder.Services.AddControllersWithViews();
 // Entity Framework Core kullanarak veritabaný baðlantýsýný yapýlandýrýn
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
-    options.UseSqlServer("Server=DESKTOP-JOV1OEK;Database=Qr;Trusted_Connection=True;");
+    options.UseSqlServer("Server=SQL5109.site4now.net;Database=db_aa642d_aztukaf;User Id=db_aa642d_aztukaf_admin;Password=melikov__03;");
 });
+
 
 // Session kullanýmýný etkinleþtirin
 builder.Services.AddSession(options =>
@@ -40,9 +41,12 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.UseSession(); // Middleware'yi buraya taþýdýk
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+        name: "areas",
+        pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
-
+    endpoints.MapDefaultControllerRoute();
+});
 app.Run();

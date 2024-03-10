@@ -1,6 +1,6 @@
 ﻿@using QrSystem.ViewModel
 @model HomeVM
-@using Microsoft.AspNetCore.Http 
+@using Microsoft.AspNetCore.Http
 @{
     var qrCodeIdValue = ViewBag.QrCodeId ?? "";
 }
@@ -62,7 +62,8 @@
                             <ul class="languages-list">
                                 <a href="mealsaae5.html?inpage=30&amp;hl=en" title="En">EN</a>
                                 <a href="meals060f.html?inpage=30&amp;hl=ru" title="Ru">RU</a>
-                                <a asp-controller="Basket" asp-action="Index" class="basket_text fw-bold fs-4">Səbət</a>
+                                <a asp-controller="Basket" asp-action="Index" asp-route-qrCodeId="@ViewBag.QrCodeId" class="basket_text fw-bold fs-4">Səbət</a>
+                           
                             </ul>
                         </div>
                     </div>
@@ -87,7 +88,7 @@
 
                                                             <a class="opener" href="#"></a>
                                                             <ul>
-                                                               
+
                                                                 <li class="" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
                                                                     <a href="special-menuce56.html?hl=az" title="Özəl təkliflər" class="" itemprop="url"><span val="Özəl təkliflər" itemprop="name">Özəl təkliflər</span></a>
                                                                 </li>
@@ -211,15 +212,7 @@
                         <div class="col-2">
                             <a class="icon-search search-opener" data-src="#search-holder" href="javascript:;"></a>
                             <div id="search-holder" style="display:none;">
-                                <div class="h1">Axtarış</div>
-                                <form class="search-panel" action="https://mado.az/search">
-                                    <div class="field-holder">
-                                        <input type="text" id="autocomplete-field" name="q" placeholder="Axtarış">
-                                        <div class="submit-holder">
-                                            <input class="button" type="submit" value="Bütün nəticələr">
-                                        </div>
-                                    </div>
-                                </form>
+                                <a asp-controller="Basket" asp-action="Index" asp-route-qrCodeId="@ViewBag.QrCodeId" class="basket_text fw-bold fs-4">Səbət</a>
                             </div>
                         </div>
                     </div>
@@ -230,7 +223,7 @@
             <section class="section-content">
                 <div class="container">
                     <div class="row">
-                        <div class="col-lg-5 mr-auto ml-auto">
+                        <div class=" mr-auto ml-auto">
                             <h1>Yeməklər</h1>
                             <ul class="breadcrumbs">
                                 <li>
@@ -258,66 +251,313 @@
                                 <button type="submit" class="btn btn-primary">Gönder</button>
                             </form>
 
+                            <style>
 
+                                .category-filter {
+                                    overflow-x: auto; /* Yatay kaydırma çubuğunu etkinleştir */
+                                    white-space: nowrap; /* Butonların alt satıra geçmesini engelle */
+                                    display: flex;
+                                    overflow-x: auto;
+                                    -webkit-overflow-scrolling: touch;
+                                    scrollbar-width: none;
+                                }
 
+                                button:hover {
+                                    background-color: #21520f;
+                                }
 
+                                .category-filter::-webkit-scrollbar {
+                                    display: none;
+                                }
 
+                                .tabcontent-general {
+                                    display: flex;
+                                    padding: 0;
+                                    margin: 0;
+                                    list-style: none;
+                                }
 
-                           
+                                .mybtn {
+                                    flex: 0 0 auto;
+                                    margin-right: 10px;
+                                    cursor: grab;
+                                    color: black;
+                                    border: none;
+                                    outline: none;
+                                    padding: 12px 20px;
+                                    background-color: #c8c8c8;
+                                    border-radius: 32px;
+                                    width: max-content;
+                                    display: flex;
+                                    height: 35px;
+                                    align-items: center;
+                                    justify-content: center;
+                                    margin: 5px 1px;
+                                    transition: .5s ease;
+                                    font-weight: 500;
+                                    font-size: 13px;
+                                }
 
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xl-6 col-md-5">
-                            <div id="product_list_container">
-                                <div class="thumbnails-grid col-3">
-                                    @foreach (var item in Model.Product)
-                                    {
-                                        <div>
-                                            <div class="thumbnail-category">
-                                                <div class="thumbnail-media-holder">
-                                                    <a href="meals/Pomidor-xiyar-salati-54.html">
-                                                        <img src="~/mado/ProductImage/@item.ImagePath" alt="@item.Name" width="259" height="259">
-                                                    </a>
-                                                </div>
-                                                <div class="thumbnail-content">
-                                                    <span class="price icon-manat">@item.Price</span>
-                                                    <h3><a href="meals/Pomidor-xiyar-salati-54.html">@item.Name</a></h3>
-                                                    <form asp-controller="Basket" asp-action="AddBasket"  method="post" class="col-5 p-0 add-to-cart d-flex justify-content-end">
-                                                        <input type="hidden" name="qrCodeId" value="@ViewBag.QrCodeId" />
-                                                        <input type="hidden" name="_token" value="M85N5au8EFw5fIHoVDq1Xt78R8PfgeUVuUse8pdt">
-                                                        <input type="hidden" name="productId" value="@item.Id"> <!-- Değişiklik burada -->
-                                                        <button type="submit" class="btn artir"><img src="~/mado/sebet.png" /></button>
-                                                    </form>
+                                .product-container {
+                                    display: flex;
+                                    align-items: flex-start; /* Üstte hizala */
+                                    padding: 20px;
+                                    background-color: #f5f5f5; /* Arka plan rengi */
+                                    border-radius: 8px; /* Kenar yuvarlaklığı */
+                                    margin-bottom: 20px; /* Alt boşluk */
+                                }
 
+                                .product-image img {
+                                    width: 197px; /* Resim genişliği */
+                                    height: 220px; /* Orantılı yükseklik */
+                                    border-radius: 8px; /* Kenar yuvarlaklığı */
+                                }
 
-                                                  
-                                                    <p></p>
-                                                </div>
-                                            </div>
-                                        </div>
+                                .product-details {
+                                    flex-grow: 1;
+                                    padding-left: 20px; /* Resim ile metin arasındaki boşluk */
+                                    text-align: left;
+                                }
+
+                                .product-description {
+                                    margin: 10px 0; /* Açıklama üst ve alt boşluğu */
+                                }
+
+                                .product-purchase-info {
+                                    display: flex;
+                                    flex-direction: column; /* Fiyat ve butonu üstte hizala */
+                                    gap: 10px; /* Fiyat ve buton arasındaki boşluk */
+                                }
+
+                                
+                                .cart-button {
+                                    width: 160px;
+                                    height: 30px;
+                                    margin-left: auto;
+                                    margin-right: 0;
+                                    background-color: #21520f;
+                                    display: flex;
+                                    justify-content: space-between;
+                                    align-items: center;
+                                    padding: 0 7px; /* Metin ve simgeler arasında boşluk ekler */
+                                }
+
+                                    .cart-button span,
+                                    .cart-button i {
+                                        flex: 1; /* Metin ve simgeleri eşit genişlikte yaymak için */
                                     }
+
+                                    .cart-button:hover {
+                                        background-color: #005f73; /* Buton arka plan rengi - hover */
+                                    }
+
+                                .Sebeteat {
+                                    font-size: 12px;
+                                }
+                                .posision{
+                                    font-size: 12px;
+                                    display: none
+                                }
+
+                                .bi-cart-check-fill{
+                                    font-size: 12px;
+                                }
+
+                                .tabcontent {
+                                    display: none;
+                                }
+
+                              
+
+
+                                @@media screen and (max-width: 768px) {
+                                    .product-container {
+                                        display: flex;
+                                        flex-direction: row;
+                                        align-items: center;
+                                        gap: 4px;
+                                    }
+
+                                    .product-image {
+                                        width: 127px;
+                                        height: 150px;
+                                        margin-bottom: 70px;
+                                    }
+
+                                    .product-details {
+                                        display: flex;
+                                        flex-direction: column;
+                                        gap: 3px;
+                                        text-align: left;
+                                    }
+
+                                    .cart-button {
+                                        width: 50px;
+                                        justify-content: center;
+                                    }
+                                }
+
+                                .product-purchase-info {
+                                    display: flex;
+                                    flex-direction: column; /* Fiyat ve butonu üstte hizala */
+                                    gap: 10px; /* Fiyat ve buton arasındaki boşluk */
+                                }
+
+                            </style>
+
+                            <div class=" category-filter" style="overflow: auto;" id="ddd">
+                                <div class="category">
+                                    <ul class="tabcontent-general allCategories">
+                                       
+                                        @foreach (var item in Model.ParentsCategory)
+                                        {
+                                            <button class="tablinks mybtn " onclick="openCity(event, '@item.Id==')">@item.Name</button>
+                                        }
+
+
+                                    </ul>
                                 </div>
+                                <div id="f-scroll"></div>
+
+
+                            </div>
+                            <div class="container product1" style="" id="meals">
+                               
+                                @foreach (var item in Model.ParentsCategory)
+                                {
+                                    <div id="@item.Id==" data-gcat="gcat_0" class="tabcontent findByScroll" style="display: none;">
+                                        <div class="line"></div>
+                                        <div class="row text-center">
+                                            <h1>@item.Name</h1>
+                                            <p></p>
+                                        </div>
+                                        <div class="row">
+                                            @if (item.Products != null)
+                                            {
+                                                @foreach (var item1 in item.Products)
+                                                {
+                                                    <div id="@item.Id==" class="desk col-lg-6 col-md-12" data-modifmap="">
+                                                        <div class="product-container">
+                                                            <div class="product-image">
+                                                                <img src="~/Image/Product/568f8671-3e80-4a73-928f-3c68c8243782monyoo.jpg" alt="@item1.Name">
+                                                            </div>
+                                                            <div class="product-details">
+                                                              
+                                                                <h3>@item1.Name</h3>
+                                                                <p class="product-description">@item1.Description...</p>
+                                                                <div class="product-purchase-info">
+                                                                    <p class="product-price">@item1.Price ₼</p>
+                                                                    <form asp-controller="Basket" asp-action="AddBasket" method="post" class="col-5 p-0 add-to-cart d-flex justify-content-end" onsubmit="handleFormSubmit(event, this)">
+                                                                        <input type="hidden" name="qrCodeId" value="@ViewBag.QrCodeId" />
+                                                                        <input type="hidden" name="_token" value="M85N5au8EFw5fIHoVDq1Xt78R8PfgeUVuUse8pdt">
+                                                                        <input type="hidden" name="productId" value="@item1.Id"> <!-- Değişiklik burada -->
+                                                                        <button type="submit" class="cart-button" onclick="handleButtonClick(event, this)">
+                                                                            <span class="Sebeteat"><i class="fa fa-shopping-cart"></i> Sebete at</span>
+                                                                            <span class="posision"><i class="bi bi-cart-check-fill"></i>Elave Edildi</span>
+                                                                        </button>
+                                                                    </form>
+
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            }
+                                        </div>
+                                    </div>
+                                }
+                                <script>
+                                    document.addEventListener("DOMContentLoaded", function () {
+                                        var buttons = document.querySelectorAll(".cart-button");
+
+                                        buttons.forEach(function (button) {
+                                            button.addEventListener("click", function (event) {
+                                                var addedText = this.querySelector(".posision");
+
+                                                // Sebete at metnini gizle
+                                                this.querySelector(".Sebeteat").style.display = "none";
+
+                                                // Elave Edildi metnini göster
+                                                addedText.style.display = "inline";
+
+                                                // Belirli bir süre sonra metni kaldır
+                                                setTimeout(function () {
+                                                    addedText.style.display = "none";
+                                                    // Sebete at metnini geri göster
+                                                    button.querySelector(".Sebeteat").style.display = "inline";
+                                                }, 2000);
+                                            });
+                                        });
+                                    });
+
+
+                                </script>
+
 
                                 <script>
-                                    // Her sepet düğmesine click olayını dinle
-                                    var addToCartButtons = document.querySelectorAll('.sebet');
-                                    addToCartButtons.forEach(function (button) {
-                                        button.addEventListener('click', function () {
-                                            var productName = this.getAttribute('data-product'); // Ürün adını al
-                                            var productId = this.getAttribute('data-id'); // Ürün Id'sini al
-                                            var quantityElement = document.getElementById(productId); // Ürün miktarı için elementi bul
-                                            var quantity = parseInt(quantityElement.innerText) + 1; // Mevcut miktarı al ve bir arttır
-                                            quantityElement.innerText = quantity; // Miktarı güncelle
-                                            var xhr = new XMLHttpRequest();
-                                            xhr.open('POST', 'Sebet.cshtml', true); // Sebet.cshtml sayfasına POST isteği gönder
-                                            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
-                                            xhr.send('productName=' + encodeURIComponent(productName)); // Ürün adını POST verisi olarak gönder
-                                            console.log("Ürün sepete eklendi:", productName);
-                                            console.log("ok"); // Konsola "ok" yazdır
+                                    document.addEventListener('DOMContentLoaded', function () {
+                                        document.querySelectorAll('.add-to-cart').forEach(item => {
+                                            item.addEventListener('click', event => {
+                                                event.preventDefault(); // Formun submit işlemini engelle
+                                                var form = event.target.closest('form'); // Formu bul
+                                                var formData = new FormData(form); // Form verilerini al
+                                                var xhr = new XMLHttpRequest(); // XMLHttpRequest nesnesi oluştur
+                                                xhr.open(form.method, form.action, true); // İstek türü ve adresini ayarla
+                                                xhr.onload = function () {
+                                                    if (xhr.status === 200) {
+                                                        // Başarılı yanıt durumunda yapılacaklar
+                                                        // İstediğiniz ek işlemleri buraya ekleyebilirsiniz
+                                                        console.log('Ürün sepete eklendi.');
+                                                    } else {
+                                                        // Hata durumunda yapılacaklar
+                                                        console.error('Hata oluştu: ' + xhr.status);
+                                                    }
+                                                };
+                                                xhr.onerror = function () {
+                                                    console.error('İstek tamamlanamadı.');
+                                                };
+                                                xhr.send(formData); // Form verilerini gönder
+                                            });
                                         });
                                     });
                                 </script>
+
+
+                               
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-6 col-md-5">
+                                <div id="product_list_container">
+                                    <style>
+                                        .thumbnail-media-holder img {
+                                            width: 200px; /* Resimlerin genişliğini ayarlar */
+                                            height: 200px; /* Resimlerin yüksekliğini ayarlar */
+                                            object-fit: cover; /* Resmi kaplayacak şekilde sığdırır, böylece oranı korunur ama fazlalıklar kesilir */
+                                        }
+                                    </style>
+                                   
+
+                                    <script>
+                                        // Her sepet düğmesine click olayını dinle
+                                        var addToCartButtons = document.querySelectorAll('.sebet');
+                                        addToCartButtons.forEach(function (button) {
+                                            button.addEventListener('click', function () {
+                                                var productName = this.getAttribute('data-product'); // Ürün adını al
+                                                var productId = this.getAttribute('data-id'); // Ürün Id'sini al
+                                                var quantityElement = document.getElementById(productId); // Ürün miktarı için elementi bul
+                                                var quantity = parseInt(quantityElement.innerText) + 1; // Mevcut miktarı al ve bir arttır
+                                                quantityElement.innerText = quantity; // Miktarı güncelle
+                                                var xhr = new XMLHttpRequest();
+                                                xhr.open('POST', 'Sebet.cshtml', true); // Sebet.cshtml sayfasına POST isteği gönder
+                                                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+                                                xhr.send('productName=' + encodeURIComponent(productName)); // Ürün adını POST verisi olarak gönder
+                                                console.log("Ürün sepete eklendi:", productName);
+                                                console.log("ok"); // Konsola "ok" yazdır
+                                            });
+                                        });
+                                    </script>
 
                                 </div>
                                 <div class="button-holder text-center">
@@ -331,199 +571,233 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-2 col-md-3 order-first">
-                            <div class="widget">
-                                <ul class="side-nav">
-                                    <li class="" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
-                                        <a href="special-menuce56.html?hl=az" title="Özəl təkliflər" class="" itemprop="url">
-                                            Özəl təkliflər
-                                        </a>
-                                    </li>
-                                    <li class="" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
-                                        <a href="yenice56.html?hl=az" title="Menyuda yeni" class="" itemprop="url">
-                                            Menyuda yeni
-                                        </a>
-                                    </li>
-                                    <li class="display" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
-                                        <span class="arrow"></span><a href="mealsce56.html?hl=az" title="Yeməklər" class="on opener" itemprop="url">
-                                            Yeməklər
-                                        </a>
-                                        <ul>
-                                            <li class="" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
-                                                <a href="meals/breakfastce56.html?hl=az" title="Səhər yeməkləri" class="" itemprop="url">
-                                                    Səhər yeməkləri
-                                                </a>
-                                            </li>
-                                            <li class="" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
-                                                <a href="meals/soupsce56.html?hl=az" title="Şorbalar" class="" itemprop="url">
-                                                    Şorbalar
-                                                </a>
-                                            </li>
-                                            <li class="" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
-                                                <a href="meals/saladsce56.html?hl=az" title="Salatlar" class="" itemprop="url">
-                                                    Salatlar
-                                                </a>
-                                            </li>
-                                            <li class="" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
-                                                <a href="meals/sancksce56.html?hl=az" title="Qəlyanaltılar" class="" itemprop="url">
-                                                    Qəlyanaltılar
-                                                </a>
-                                            </li>
-                                            <li class="" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
-                                                <a href="meals/hot-dishesce56.html?hl=az" title="İsti yeməklər" class="" itemprop="url">
-                                                    İsti yeməklər
-                                                </a>
-                                            </li>
-                                            <li class="" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
-                                                <a href="meals/kababce56.html?hl=az" title="Kabab" class="" itemprop="url">
-                                                    Kabab
-                                                </a>
-                                            </li>
-                                            <li class="" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
-                                                <a href="meals/burgers-sandwichesce56.html?hl=az" title="Burgerlər və sendviçlər" class="" itemprop="url">
-                                                    Burgerlər və sendviçlər
-                                                </a>
-                                            </li>
-                                            <li class="" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
-                                                <a href="meals/pizzace56.html?hl=az" title="Pizzalar" class="" itemprop="url">
-                                                    Pizzalar
-                                                </a>
-                                            </li>
-                                            <li class="" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
-                                                <a href="meals/pastace56.html?hl=az" title="Pastalar" class="" itemprop="url">
-                                                    Pastalar
-                                                </a>
-                                            </li>
-                                            <li class="" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
-                                                <a href="meals/diyetikce56.html?hl=az" title="Diyetik Yeməklər" class="" itemprop="url">
-                                                    Diyetik Yeməklər
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
-                                        <span class="arrow"></span><a href="sweetsce56.html?hl=az" title="Şirniyyatlar" class=" opener" itemprop="url">
-                                            Şirniyyatlar
-                                        </a>
-                                        <ul>
-                                            <li class="" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
-                                                <a href="sweets/milk-sweetsce56.html?hl=az" title="Südlü şirniyyatlar" class="" itemprop="url">
-                                                    Südlü şirniyyatlar
-                                                </a>
-                                            </li>
-                                            <li class="" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
-                                                <a href="sweets/hot-sweetsce56.html?hl=az" title="İsti şirniyyatlar" class="" itemprop="url">
-                                                    İsti şirniyyatlar
-                                                </a>
-                                            </li>
-                                            <li class="" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
-                                                <a href="sweets/special-dessertsce56.html?hl=az" title="Xüsusi desertlər" class="" itemprop="url">
-                                                    Xüsusi desertlər
-                                                </a>
-                                            </li>
-                                            <li class="" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
-                                                <a href="sweets/pakhlavace56.html?hl=az" title="Paxlavalar" class="" itemprop="url">
-                                                    Paxlavalar
-                                                </a>
-                                            </li>
-                                            <li class="" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
-                                                <a href="sweets/cakesce56.html?hl=az" title="Tortlar" class="" itemprop="url">
-                                                    Tortlar
-                                                </a>
-                                            </li>
-                                            <li class="" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
-                                                <a href="sweets/gurabiace56.html?hl=az" title="Qurabiyələr" class="" itemprop="url">
-                                                    Qurabiyələr
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
-                                        <span class="arrow"></span><a href="ice-creamce56.html?hl=az" title="Dondurmalar" class=" opener" itemprop="url">
-                                            Dondurmalar
-                                        </a>
-                                        <ul>
-                                            <li class="" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
-                                                <a href="ice-cream/marash-ice-creamce56.html?hl=az" title="Ənənəvi kəsmə dondurmalar" class="" itemprop="url">
-                                                    Ənənəvi kəsmə dondurmalar
-                                                </a>
-                                            </li>
-                                            <li class="" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
-                                                <a href="ice-cream/freezing-flavorsce56.html?hl=az" title="Dondurmalı ləzzətlər" class="" itemprop="url">
-                                                    Dondurmalı ləzzətlər
-                                                </a>
-                                            </li>
-                                            <li class="" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
-                                                <a href="ice-cream/coupe-splitsce56.html?hl=az" title="Kuplar və splitlər" class="" itemprop="url">
-                                                    Kuplar və splitlər
-                                                </a>
-                                            </li>
-                                            <li class="" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
-                                                <a href="ice-cream/ice-cream-assortmentce56.html?hl=az" title="Dondurma çeşidləri" class="" itemprop="url">
-                                                    Dondurma çeşidləri
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
-                                        <a href="bakeryce56.html?hl=az" title="Fırın məhsulları" class="" itemprop="url">
-                                            Fırın məhsulları
-                                        </a>
-                                    </li>
-                                    <li class="" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
-                                        <a href="biznes-lanchce56.html?hl=az" title="Business Lunch" class="" itemprop="url">
-                                            Business Lunch
-                                        </a>
-                                    </li>
-                                    <li class="" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
-                                        <span class="arrow"></span><a href="drinksce56.html?hl=az" title="İçkilər" class=" opener" itemprop="url">
-                                            İçkilər
-                                        </a>
-                                        <ul>
-                                            <li class="" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
-                                                <a href="drinks/coffeece56.html?hl=az" title="Qəhvələr" class="" itemprop="url">
-                                                    Qəhvələr
-                                                </a>
-                                            </li>
-                                            <li class="" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
-                                                <a href="drinks/teace56.html?hl=az" title="Çaylar" class="" itemprop="url">
-                                                    Çaylar
-                                                </a>
-                                            </li>
-                                            <li class="" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
-                                                <a href="drinks/milkshakece56.html?hl=az" title="Milkşeyklər" class="" itemprop="url">
-                                                    Milkşeyklər
-                                                </a>
-                                            </li>
-                                            <li class="" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
-                                                <a href="drinks/frozen-drink-mixesce56.html?hl=az" title="Buzlu Mikslər" class="" itemprop="url">
-                                                    Buzlu Mikslər
-                                                </a>
-                                            </li>
-                                            <li class="" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
-                                                <a href="drinks/natural-juicesce56.html?hl=az" title="Təbii şirələr" class="" itemprop="url">
-                                                    Təbii şirələr
-                                                </a>
-                                            </li>
-                                            <li class="" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
-                                                <a href="drinks/other-drinksce56.html?hl=az" title="Digər içkilər" class="" itemprop="url">
-                                                    Digər içkilər
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
-                                        <a href="mangal-menuce56.html?hl=az" title="Manqal menyu " class="" itemprop="url">
-                                            Manqal menyu
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
+                        @*    <div class="col-xl-2 col-md-3 order-first">
+                        <div class="widget">
+                        <ul class="side-nav">
+                        <li class="" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
+                        <a href="special-menuce56.html?hl=az" title="Özəl təkliflər" class="" itemprop="url">
+                        Özəl təkliflər
+                        </a>
+                        </li>
+                        <li class="" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
+                        <a href="yenice56.html?hl=az" title="Menyuda yeni" class="" itemprop="url">
+                        Menyuda yeni
+                        </a>
+                        </li>
+                        <li class="display" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
+                        <span class="arrow"></span><a href="mealsce56.html?hl=az" title="Yeməklər" class="on opener" itemprop="url">
+                        Yeməklər
+                        </a>
+                        <ul>
+                        <li class="" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
+                        <a href="meals/breakfastce56.html?hl=az" title="Səhər yeməkləri" class="" itemprop="url">
+                        Səhər yeməkləri
+                        </a>
+                        </li>
+                        <li class="" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
+                        <a href="meals/soupsce56.html?hl=az" title="Şorbalar" class="" itemprop="url">
+                        Şorbalar
+                        </a>
+                        </li>
+                        <li class="" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
+                        <a href="meals/saladsce56.html?hl=az" title="Salatlar" class="" itemprop="url">
+                        Salatlar
+                        </a>
+                        </li>
+                        <li class="" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
+                        <a href="meals/sancksce56.html?hl=az" title="Qəlyanaltılar" class="" itemprop="url">
+                        Qəlyanaltılar
+                        </a>
+                        </li>
+                        <li class="" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
+                        <a href="meals/hot-dishesce56.html?hl=az" title="İsti yeməklər" class="" itemprop="url">
+                        İsti yeməklər
+                        </a>
+                        </li>
+                        <li class="" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
+                        <a href="meals/kababce56.html?hl=az" title="Kabab" class="" itemprop="url">
+                        Kabab
+                        </a>
+                        </li>
+                        <li class="" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
+                        <a href="meals/burgers-sandwichesce56.html?hl=az" title="Burgerlər və sendviçlər" class="" itemprop="url">
+                        Burgerlər və sendviçlər
+                        </a>
+                        </li>
+                        <li class="" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
+                        <a href="meals/pizzace56.html?hl=az" title="Pizzalar" class="" itemprop="url">
+                        Pizzalar
+                        </a>
+                        </li>
+                        <li class="" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
+                        <a href="meals/pastace56.html?hl=az" title="Pastalar" class="" itemprop="url">
+                        Pastalar
+                        </a>
+                        </li>
+                        <li class="" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
+                        <a href="meals/diyetikce56.html?hl=az" title="Diyetik Yeməklər" class="" itemprop="url">
+                        Diyetik Yeməklər
+                        </a>
+                        </li>
+                        </ul>
+                        </li>
+                        <li class="" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
+                        <span class="arrow"></span><a href="sweetsce56.html?hl=az" title="Şirniyyatlar" class=" opener" itemprop="url">
+                        Şirniyyatlar
+                        </a>
+                        <ul>
+                        <li class="" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
+                        <a href="sweets/milk-sweetsce56.html?hl=az" title="Südlü şirniyyatlar" class="" itemprop="url">
+                        Südlü şirniyyatlar
+                        </a>
+                        </li>
+                        <li class="" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
+                        <a href="sweets/hot-sweetsce56.html?hl=az" title="İsti şirniyyatlar" class="" itemprop="url">
+                        İsti şirniyyatlar
+                        </a>
+                        </li>
+                        <li class="" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
+                        <a href="sweets/special-dessertsce56.html?hl=az" title="Xüsusi desertlər" class="" itemprop="url">
+                        Xüsusi desertlər
+                        </a>
+                        </li>
+                        <li class="" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
+                        <a href="sweets/pakhlavace56.html?hl=az" title="Paxlavalar" class="" itemprop="url">
+                        Paxlavalar
+                        </a>
+                        </li>
+                        <li class="" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
+                        <a href="sweets/cakesce56.html?hl=az" title="Tortlar" class="" itemprop="url">
+                        Tortlar
+                        </a>
+                        </li>
+                        <li class="" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
+                        <a href="sweets/gurabiace56.html?hl=az" title="Qurabiyələr" class="" itemprop="url">
+                        Qurabiyələr
+                        </a>
+                        </li>
+                        </ul>
+                        </li>
+                        <li class="" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
+                        <span class="arrow"></span><a href="ice-creamce56.html?hl=az" title="Dondurmalar" class=" opener" itemprop="url">
+                        Dondurmalar
+                        </a>
+                        <ul>
+                        <li class="" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
+                        <a href="ice-cream/marash-ice-creamce56.html?hl=az" title="Ənənəvi kəsmə dondurmalar" class="" itemprop="url">
+                        Ənənəvi kəsmə dondurmalar
+                        </a>
+                        </li>
+                        <li class="" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
+                        <a href="ice-cream/freezing-flavorsce56.html?hl=az" title="Dondurmalı ləzzətlər" class="" itemprop="url">
+                        Dondurmalı ləzzətlər
+                        </a>
+                        </li>
+                        <li class="" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
+                        <a href="ice-cream/coupe-splitsce56.html?hl=az" title="Kuplar və splitlər" class="" itemprop="url">
+                        Kuplar və splitlər
+                        </a>
+                        </li>
+                        <li class="" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
+                        <a href="ice-cream/ice-cream-assortmentce56.html?hl=az" title="Dondurma çeşidləri" class="" itemprop="url">
+                        Dondurma çeşidləri
+                        </a>
+                        </li>
+                        </ul>
+                        </li>
+                        <li class="" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
+                        <a href="bakeryce56.html?hl=az" title="Fırın məhsulları" class="" itemprop="url">
+                        Fırın məhsulları
+                        </a>
+                        </li>
+                        <li class="" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
+                        <a href="biznes-lanchce56.html?hl=az" title="Business Lunch" class="" itemprop="url">
+                        Business Lunch
+                        </a>
+                        </li>
+                        <li class="" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
+                        <span class="arrow"></span><a href="drinksce56.html?hl=az" title="İçkilər" class=" opener" itemprop="url">
+                        İçkilər
+                        </a>
+                        <ul>
+                        <li class="" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
+                        <a href="drinks/coffeece56.html?hl=az" title="Qəhvələr" class="" itemprop="url">
+                        Qəhvələr
+                        </a>
+                        </li>
+                        <li class="" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
+                        <a href="drinks/teace56.html?hl=az" title="Çaylar" class="" itemprop="url">
+                        Çaylar
+                        </a>
+                        </li>
+                        <li class="" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
+                        <a href="drinks/milkshakece56.html?hl=az" title="Milkşeyklər" class="" itemprop="url">
+                        Milkşeyklər
+                        </a>
+                        </li>
+                        <li class="" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
+                        <a href="drinks/frozen-drink-mixesce56.html?hl=az" title="Buzlu Mikslər" class="" itemprop="url">
+                        Buzlu Mikslər
+                        </a>
+                        </li>
+                        <li class="" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
+                        <a href="drinks/natural-juicesce56.html?hl=az" title="Təbii şirələr" class="" itemprop="url">
+                        Təbii şirələr
+                        </a>
+                        </li>
+                        <li class="" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
+                        <a href="drinks/other-drinksce56.html?hl=az" title="Digər içkilər" class="" itemprop="url">
+                        Digər içkilər
+                        </a>
+                        </li>
+                        </ul>
+                        </li>
+                        <li class="" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
+                        <a href="mangal-menuce56.html?hl=az" title="Manqal menyu " class="" itemprop="url">
+                        Manqal menyu
+                        </a>
+                        </li>
+                        </ul>
                         </div>
+                        </div> *@
                     </div>
                 </div>
+            @*     <style>
+                    html, body {
+                        margin: 0;
+                        padding: 0;
+                        overflow-x: hidden; /* Yatay kaydırmayı önler */
+                    }
+
+                    .fullscreenOverlay {
+                        position: fixed;
+                        bottom: 0;
+                        border-radius:0.25rem;
+                        left: 0;
+                        width: 100%; /* Viewport genişliği */
+                        height: 60px; /* Viewport yüksekliği */
+                        background-color:#ccc; /* Arka plan rengi */
+                        color: black;
+                        z-index: 1000; /* Diğer içeriklerin üzerinde görünmesi için */
+                        display: flex;
+                        justify-content: space-between; /* İçerikleri sağ ve sol kenarlara yaslar */
+                        align-items: center;
+                        padding: 0 20px; /* Sağ ve sol padding */
+                    }
+
+                    .icon {
+                        font-size: 24px; /* İkon boyutu */
+                    }
+                </style>
+                <div class="fullscreenOverlay">
+                    <i style="color:black" class="fas  fa-shopping-cart icon"></i> <!-- Sepet ikonu -->
+                    <i class="fas red fa-money-bill-wave icon"></i> <!-- Para ikonu -->
+                </div> *@
             </section>
+           
         </main>
+        
+        
         <footer id="footer">
             <div class="footer-content">
                 <div class="container">
@@ -680,15 +954,268 @@
                 </div>
             </div>
         </footer>
+       
     </div>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-70453950-47"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){ dataLayer.push(arguments); }
+        function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
         gtag('config', 'UA-70453950-47');
     </script>
+
+    <script>
+        const listOfReservationTables = [];
+        const listOfReservations = [];
+
+        var token = "MGI5MTNmYTk4ZDk0OWE3N2EzYzM5YjI1OTFlOWNkMzE=";
+        var token_id = "MTAy";
+        var table_no = "";
+        var currency = "₼";
+        var basket_name = "deirvlon_id_MTAy";
+        var ver_tutorial = "0";
+        var ver_ba = "1";
+        var ver_b = "1";
+        var ver_d = "1";
+        var ver_t = "1";
+        var ver_w = "0";
+        var ver_r = "1";
+        var ver_ad = "0";
+        var ver_r_map_pro = "0";
+        var ver_r_payment = "0";
+        var ver_dt_payment = "0";
+        var ver_monyo_pos_qr_payment = "0";
+        var ver_r_map = "0";
+        var ver_r_item = "0";
+        var ver_r_is_hotel = "0";
+        var ver_profile_screen = "1";
+        var ver_special_offer = "0";
+        var ver_promotion = "0";
+        var ver_number_collector_popup = "0";
+        var ver_service_fee_calc = "1";
+        var ver_table_payment = "0";
+        const ver_service_fee_info = 0;
+        var me_number = "";
+        var wp_number = "0515000145";
+        var active = "1";
+        const url_360 = "https://azerbaijan360.az/vtour/145/malacanesd/tour.html";
+        var service_fee = "0";
+        var first_active_hall = '';
+        const b_var = '';
+        const delivery_limit = '0';
+
+
+
+        //Neolit service fee
+        if (token_id == 'MTMxNA==' && String(window.location).split("#")[1] != 'monyo') {
+            service_fee /= 2;
+            document.getElementById('serviceCharge2').innerHTML =
+                'Servis haqqı: ' + service_fee + "%";
+            document.getElementById('serviceCharge1').innerHTML =
+                'Servis haqqı: ' + service_fee + "%";
+        }
+
+
+        //Language
+        var lng_search = "Axtar";
+        var lng_want_delete_product = "Bu məhsulu silmək istəyirsiniz?";
+
+
+        start_load('MTM1Nw==');
+
+
+
+        function openBigTabs(evt, cityName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent-big-tabs");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks-big-tabs");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(cityName).style.display = "block";
+            if (evt != null) {
+                evt.currentTarget.className += " active";
+            }
+        }
+
+        function openCity(evt, cityName) {
+            var i, tabcontent, tablinks;
+
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+
+
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+
+
+            document.getElementById(cityName).style.display = "block";
+
+
+            if (evt != null) {
+                evt.currentTarget.className += " active";
+            }
+
+
+            disable_image_loader = true;
+            setTimeout(() => {
+                disable_image_loader = false
+            }, 300);
+
+
+            //Load images
+            start_load(cityName);
+
+            /*    Analytics   */
+            sendAnalyticsCategories(cityName);
+        }
+
+
+        var current_cat_id = '';
+
+        function autoScrollCategories(id) {
+            if (id == undefined || current_cat_id == id)
+                return;
+
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+
+            if (document.getElementById("TC" + id) != null) {
+                document.getElementById("TC" + id).className += " active";
+                document.getElementById("TC" + id).scrollIntoView({
+                    behavior: 'smooth',
+                    inline: 'center'
+                });
+                current_cat_id = id;
+            }
+
+
+
+        }
+
+
+        function openGeneralCategories(evt, cityName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent-general");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks-general");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+
+            //Display
+            tablinks = document.getElementsByClassName(cityName);
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].style.display = "flex";
+            }
+
+
+
+            if (evt != null) {
+                evt.currentTarget.className += " active";
+            }
+
+
+            //   /*QOSA QALA*/
+            //   if(cityName == 'allCategories' && (token_id == 'MjM4' || token_id == 'MTQ1' || token_id == 'ODQy'|| token_id == 'MTIyMw==' || token_id == 'MTIyNg==' || token_id == 'MTIyNw==')){
+            //     $('#all_categories_button').click();
+            //   }
+
+            //Analytics
+            // updateOrdering(cityName);
+
+
+
+            //Open first element
+            try {
+                document.getElementsByClassName(cityName)[0].firstElementChild.click();
+            } catch (e) {
+
+            }
+
+        }
+
+
+        function openItem(category, id) {
+            openCity(null, category);
+            setTimeout(() => {
+                scrollItemCenterScreen(document.getElementById(id));
+                document.getElementById('select2-chz-select-container').innerHTML = lng_search + '...';
+            }, 300);
+        }
+
+
+        function findMeal() {
+            var e = document.getElementById("chz-select");
+            var data = e.options[e.selectedIndex].value.split(',');
+            var category = data[0];
+            var item = data[1];
+
+            e.value = '';
+
+
+            console.log(category);
+            openItem(category, item);
+            // alert(category);
+
+        }
+
+        document.addEventListener('keydown', function (e) {
+            if (e.keyCode == 27) {
+                displayBackToMonyoMenu();
+            }
+        });
+
+
+
+
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const ele = document.querySelector('.category-filter');
+            let pos = { left: 0, x: 0 };
+
+            const mouseDownHandler = function (e) {
+                ele.style.userSelect = 'none';
+
+                pos = {
+                    left: ele.scrollLeft,
+                    x: e.clientX,
+                };
+
+                document.addEventListener('mousemove', mouseMoveHandler);
+                document.addEventListener('mouseup', mouseUpHandler);
+                ele.style.cursor = 'grabbing';
+            };
+
+            const mouseMoveHandler = function (e) {
+                const dx = e.clientX - pos.x;
+                ele.scrollLeft = pos.left - dx;
+            };
+
+            const mouseUpHandler = function () {
+                document.removeEventListener('mousemove', mouseMoveHandler);
+                document.removeEventListener('mouseup', mouseUpHandler);
+                ele.style.cursor = 'grab';
+            };
+
+            ele.addEventListener('mousedown', mouseDownHandler);
+        });
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
 </body>
 
 <!-- Mirrored from mado.az/menu/meals by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 27 Jan 2024 22:54:01 GMT -->

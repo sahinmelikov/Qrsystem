@@ -10,5 +10,6 @@ namespace QrSystem.ViewModel
         public int QrCodeId { get;set; }
         public int ProductId { get;set; }
         public RestourantTables SelectedTable { get; set; }
+       public List <ParentsCategory> ParentsCategory { get; set; }
     }
 }

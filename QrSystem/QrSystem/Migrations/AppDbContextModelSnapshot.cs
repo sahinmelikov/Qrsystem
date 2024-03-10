@@ -38,6 +38,23 @@ namespace QrSystem.Migrations
                     b.ToTable("QrCodes");
                 });
 
+            modelBuilder.Entity("QrSystem.Models.ParentsCategory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ParentsCategories");
+                });
+
             modelBuilder.Entity("QrSystem.Models.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -58,6 +75,9 @@ namespace QrSystem.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("ParentsCategoryId")
+                        .HasColumnType("int");
+
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
@@ -65,6 +85,8 @@ namespace QrSystem.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ParentsCategoryId");
 
                     b.ToTable("Products");
                 });
@@ -106,6 +128,9 @@ namespace QrSystem.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsApproved")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -143,6 +168,17 @@ namespace QrSystem.Migrations
                     b.ToTable("ProductRestourantTables");
                 });
 
+            modelBuilder.Entity("QrSystem.Models.Product", b =>
+                {
+                    b.HasOne("QrSystem.Models.ParentsCategory", "ParentsCategory")
+                        .WithMany("Products")
+                        .HasForeignKey("ParentsCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ParentsCategory");
+                });
+
             modelBuilder.Entity("QrSystem.Models.RestourantTables", b =>
                 {
                     b.HasOne("QrSystem.Models.QrCode", "QrCode")
@@ -167,6 +203,11 @@ namespace QrSystem.Migrations
                         .HasForeignKey("TablesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("QrSystem.Models.ParentsCategory", b =>
+                {
+                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }

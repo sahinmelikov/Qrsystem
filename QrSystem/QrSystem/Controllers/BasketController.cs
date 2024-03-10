@@ -68,6 +68,7 @@ namespace QrSystem.Controllers
 
             return View(basketItemVMs);
         }
+      
 
         [HttpPost]
         public IActionResult AddBasket(int qrCodeId, int productId)
@@ -102,7 +103,7 @@ namespace QrSystem.Controllers
             var cookieOptions = new CookieOptions { Expires = DateTime.Now.AddDays(1) };
             Response.Cookies.Append(basketCookieName, JsonConvert.SerializeObject(basketVMList), cookieOptions);
 
-            return RedirectToAction("Index", new { qrCodeId });
+            return RedirectToAction("Index","Home", new { qrCodeId });
         }
 
 
@@ -216,43 +217,51 @@ namespace QrSystem.Controllers
             // Belirli bir QR koduna sahip sepet ürünlerini al
             List<BasketİtemVM> productsInCart = GetProductsInCart(qrCodeId);
 
-            // Sepetin onaylanması durumunda, her bir sepet için ayrı bir tablo oluşturun
-            SaveCartToDatabase(qrCodeId, productsInCart);
+            // Sepetteki ürünleri onayla
+            SaveApprovedProductsToSession(qrCodeId, productsInCart);
 
-            // Sipariş onaylandıktan sonra sepetin temizlenmesi gerekiyorsa, temizleme işlemini gerçekleştirin
-            ClearCart(qrCodeId);
-
-            return RedirectToAction("Urun", new { qrCodeId = qrCodeId });
+            // urun.cshtml sayfasına ViewModel'i gönder
+            return RedirectToAction("Urun");
         }
 
-        // Sepetteki ürünleri kalıcı olarak veritabanına kaydetmek için örnek bir metot
-        private void SaveCartToDatabase(int qrCodeId, List<BasketİtemVM> productsInCart)
+        public IActionResult Urun()
         {
-            foreach (var item in productsInCart)
+            var viewModel = new UrunlerViewModel();
+
+            foreach (var key in HttpContext.Session.Keys)
             {
-                _appDbContext.SaxlanilanS.Add(new SaxlanilanSifarish
+                if (key.StartsWith("ApprovedProducts-"))
                 {
-                    QrCodeId = qrCodeId,
-                    Name = item.Name,
-                    Description = item.Description,
-                    Price = item.Price,
-                    ProductCount = item.ProductCount,
-                    ImagePath = item.ImagePath,
-                    TableName = item.TableName
-                });
+                    var qrCodeId = int.Parse(key.Split('-')[1]);
+                    var productsJson = HttpContext.Session.GetString(key);
+                    var approvedProducts = JsonConvert.DeserializeObject<List<BasketİtemVM>>(productsJson);
+
+                    // QR kodu ve ona ait ürünleri ViewModel'e ekleyin
+                    if (!viewModel.UrunlerByQrCodeAndTable.ContainsKey(qrCodeId))
+                    {
+                        viewModel.UrunlerByQrCodeAndTable[qrCodeId] = new Dictionary<string, List<BasketİtemVM>>();
+                    }
+
+                    foreach (var product in approvedProducts)
+                    {
+                        if (!viewModel.UrunlerByQrCodeAndTable[qrCodeId].ContainsKey(product.TableName))
+                        {
+                            viewModel.UrunlerByQrCodeAndTable[qrCodeId][product.TableName] = new List<BasketİtemVM>();
+                        }
+                        viewModel.UrunlerByQrCodeAndTable[qrCodeId][product.TableName].Add(product);
+                    }
+                }
             }
 
-            _appDbContext.SaveChanges();
+            return View(viewModel); // Burada viewModel nesnesini görünüme geçirin
         }
 
-        // Sepetin temizlenmesi için örnek bir metot
-        private void ClearCart(int qrCodeId)
+        private void SaveApprovedProductsToSession(int qrCodeId, List<BasketİtemVM> approvedProducts)
         {
-            var basketCookieName = COOKIES_BASKET + "_" + qrCodeId;
-            Response.Cookies.Delete(basketCookieName);
+            var sessionKey = $"ApprovedProducts-{qrCodeId}";
+            HttpContext.Session.SetString(sessionKey, JsonConvert.SerializeObject(approvedProducts));
         }
 
-        // Sepetteki ürünleri almak için örnek bir metot
         private List<BasketİtemVM> GetProductsInCart(int qrCodeId)
         {
             List<BasketİtemVM> basketItemVMs = new List<BasketİtemVM>();
@@ -266,37 +275,32 @@ namespace QrSystem.Controllers
                     .Include(p => p.Tables)
                     .FirstOrDefault(p => p.Id == item.ProductId);
 
-                if (product != null && product.Tables != null && product.Tables.Any())
+                if (product != null)
                 {
-                    foreach (var table in product.Tables)
+                    var tableName = item.TableNumber.ToString();
+                    var existingItem = basketItemVMs.FirstOrDefault(b => b.ProductId == product.Id && b.TableName == tableName);
+                    if (existingItem != null)
                     {
-                        var existingItem = basketItemVMs.FirstOrDefault(b => b.Id == product.Id && b.TableName == table.TableNumber.ToString());
-                        if (existingItem != null)
+                        existingItem.ProductCount += item.Count; // Ürün zaten varsa miktarını artır
+                    }
+                    else
+                    {
+                        basketItemVMs.Add(new BasketİtemVM
                         {
-                            existingItem.ProductCount += item.Count; // Ürün zaten varsa miktarını artır
-                        }
-                        else
-                        {
-                            basketItemVMs.Add(new BasketİtemVM
-                            {
-                                Name = product.Name,
-                                Id = product.Id,
-                                Description = product.Description,
-                                Price = product.Price,
-                                ProductCount = item.Count,
-                                ImagePath = product.ImagePath,
-                                TableName = table.TableNumber.ToString()
-                            });
-                        }
+                            Name = product.Name,
+                            ProductId = product.Id,
+                            Description = product.Description,
+                            Price = product.Price,
+                            ProductCount = item.Count,
+                            ImagePath = product.ImagePath,
+                            TableName = tableName
+                        });
                     }
                 }
             }
 
             return basketItemVMs;
         }
-
-
-
 
     }
 

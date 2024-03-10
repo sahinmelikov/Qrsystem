@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using QrSystem.DAL;
 using QrSystem.Models;
 using QrSystem.ViewModel;
@@ -22,9 +23,10 @@ namespace QrSystem.Controllers
 
             HomeVM homeVM = new HomeVM()
             {
-                Product = _appDbContext.Products.ToList(),
+                Product = _appDbContext.Products.Include(d=>d.ParentsCategory).ToList(),
                 QrCode = _appDbContext.QrCodes.ToList(),
                 RestourantTables = _appDbContext.Tables.ToList(),
+                ParentsCategory=_appDbContext.ParentsCategories.ToList(),
             };
             return View(homeVM);
         }
@@ -45,6 +47,7 @@ namespace QrSystem.Controllers
                 {
                     Product = _appDbContext.Products.ToList(),
                     RestourantTables = _appDbContext.Tables.Where(d => d.QrCodeId == qrCodeId).ToList(),
+                    ParentsCategory = _appDbContext.ParentsCategories.ToList(),
                 };
                 return View(homeVM);
             }

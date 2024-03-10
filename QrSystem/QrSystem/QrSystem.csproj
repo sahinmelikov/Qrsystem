@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="wwwroot\Image\Product\" />
     <Folder Include="wwwroot\mado\hts-cache\ref\" />
     <Folder Include="wwwroot\mado\mado.az\menu\bakery\" />
     <Folder Include="wwwroot\mado\mado.az\menu\biznes-lanch\" />
@@ -36,6 +37,28 @@
     <Folder Include="wwwroot\mado\mado.az\pics\259\259\product\619\" />
     <Folder Include="wwwroot\mado\mado.az\pics\259\259\product\646\" />
     <Folder Include="wwwroot\mado\ProductImage\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\admin\template\.DS_Store" />
+    <None Include="wwwroot\admin\template\documentation\.DS_Store" />
+    <None Include="wwwroot\admin\template\fonts\.DS_Store" />
+    <None Include="wwwroot\admin\template\fonts\Roboto\.DS_Store" />
+    <None Include="wwwroot\admin\template\images\.DS_Store" />
+    <None Include="wwwroot\admin\template\images\auth\.DS_Store" />
+    <None Include="wwwroot\admin\template\images\faces\.DS_Store" />
+    <None Include="wwwroot\admin\template\js\.DS_Store" />
+    <None Include="wwwroot\admin\template\pages\.DS_Store" />
+    <None Include="wwwroot\admin\template\pages\charts\.DS_Store" />
+    <None Include="wwwroot\admin\template\pages\forms\.DS_Store" />
+    <None Include="wwwroot\admin\template\pages\icons\.DS_Store" />
+    <None Include="wwwroot\admin\template\pages\samples\.DS_Store" />
+    <None Include="wwwroot\admin\template\pages\tables\.DS_Store" />
+    <None Include="wwwroot\admin\template\pages\ui-features\.DS_Store" />
+    <None Include="wwwroot\admin\template\scss\.DS_Store" />
+    <None Include="wwwroot\admin\template\scss\components\.DS_Store" />
+    <None Include="wwwroot\admin\template\scss\mixins\.DS_Store" />
+    <None Include="wwwroot\admin\template\vendors\.DS_Store" />
   </ItemGroup>
 
   <ItemGroup>

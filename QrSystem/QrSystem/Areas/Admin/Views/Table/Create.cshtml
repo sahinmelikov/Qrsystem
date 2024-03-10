@@ -1,0 +1,18 @@
+﻿@model TableVM
+<div class="container">
+    <div class="card p-4">
+        <form method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label asp-for="QrCodeId"></label>
+                <input asp-for="QrCodeId" class="form-control">
+                <span asp-validation-for="QrCodeId" class="text-danger"></span>
+
+                <label asp-for="TableNumber"></label>
+                <input asp-for="TableNumber" class="form-control">
+                <span asp-validation-for="TableNumber" class="text-danger"></span>
+
+            </div>
+            <button class="btn btn-success" type="submit">Submit</button>
+        </form>
+    </div>
+</div>

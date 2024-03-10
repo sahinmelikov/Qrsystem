@@ -1,30 +1,58 @@
-﻿@foreach (var qrCodeId in Model.Keys)
-{
-    var masa = Model[qrCodeId].FirstOrDefault()?.TableName;
-    <h3>Masa @masa</h3>
+﻿@model QrSystem.ViewModel.UrunlerViewModel
 
-    <table class="table">
-        <!-- Tablo başlıkları buraya eklenebilir -->
-        <thead>
-            <tr>
-                <th>Ürün Adı</th>
-                <th>Açıklama</th>
-                <th>Fiyat</th>
-                <th>Miktar</th>
-                <th>Görsel</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var product in Model[qrCodeId])
-            {
-                <tr>
-                    <td>@product.Name</td>
-                    <td>@product.Description</td>
-                    <td>@product.Price.ToString("C2")</td>
-                    <td>@product.ProductCount</td>
-                    <td><img src="@product.ImagePath" alt="@product.Name" width="100" height="100" /></td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ürünler</title>
+    <!-- Bootstrap CSS bağlantısı -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        @foreach (var qrCodeId in Model.UrunlerByQrCodeAndTable.Keys)
+        {
+            <div class="row">
+                <div class="col">
+                    <h3>Masa Nomresi @qrCodeId</h3>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                
+                                <th>Product Name</th>
+                                <th>Description</th>
+                                <th>Price</th>
+                                <th>Product Count</th>
+                                <th>Image</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var kvp in Model.UrunlerByQrCodeAndTable[qrCodeId])
+                            {
+                                
+                                foreach (var product in kvp.Value)
+                                {
+                                    <tr>
+                                        
+                                        <td>@product.Name</td>
+                                        <td>@product.Description</td>
+                                        <td>@product.Price</td>
+                                        <td>@product.ProductCount</td>
+                                        <td><img src="~/Image/Product/@product.ImagePath" alt="@product.Name" width="100" height="100" /></td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        }
+    </div>
+
+    <!-- Bootstrap JS ve bağımlılıkları -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

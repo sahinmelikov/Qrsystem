@@ -10,5 +10,6 @@
         public int ProductCount { get; set; }
         public string ImagePath { get; set; }
         public string TableName { get; set; }
+        public bool IsApproved { get; set; } // Onay durumu
     }
 }

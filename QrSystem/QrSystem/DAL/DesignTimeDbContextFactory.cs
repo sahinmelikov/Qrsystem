@@ -8,7 +8,7 @@ namespace QrSystem.DAL
         public AppDbContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
-            optionsBuilder.UseSqlServer("Server=DESKTOP-JOV1OEK;Database=Qr;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer("Server=SQL5109.site4now.net;Database=db_aa642d_aztukaf;User Id=db_aa642d_aztukaf_admin;Password=melikov__03;");
 
             return new AppDbContext(optionsBuilder.Options);
             //}
